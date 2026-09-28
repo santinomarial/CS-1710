@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Netflix Movies vs TV Shows by Year</title>
+<style>
+  :root {
+    color-scheme: light;
+    --page:           #f9f9f7;
+    --surface-1:      #fcfcfb;
+    --text-primary:   #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted:     #898781;
+    --gridline:       #e1e0d9;
+    --baseline:       #c3c2b7;
+    --border:         rgba(11,11,11,0.10);
+    --series-movie:   #2a78d6;
+    --series-tv:      #eb6834;
+    --hatch:          rgba(255,255,255,0.62);
+    --line-ink:       #0b0b0b;
+    --anno:           rgba(11,11,11,0.45);
+    --hover-wash:     rgba(11,11,11,0.04);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --page:           #0d0d0d;
+      --surface-1:      #1a1a19;
+      --text-primary:   #ffffff;
+      --text-secondary: #c3c2b7;
+      --text-muted:     #898781;
+      --gridline:       #2c2c2a;
+      --baseline:       #383835;
+      --border:         rgba(255,255,255,0.10);
+      --series-movie:   #3987e5;
+      --series-tv:      #d95926;
+      --hatch:          rgba(255,255,255,0.50);
+      --line-ink:       #ffffff;
+      --anno:           rgba(255,255,255,0.55);
+      --hover-wash:     rgba(255,255,255,0.05);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page:           #0d0d0d;
+    --surface-1:      #1a1a19;
+    --text-primary:   #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted:     #898781;
+    --gridline:       #2c2c2a;
+    --baseline:       #383835;
+    --border:         rgba(255,255,255,0.10);
+    --series-movie:   #3987e5;
+    --series-tv:      #d95926;
+    --hatch:          rgba(255,255,255,0.50);
+    --line-ink:       #ffffff;
+    --anno:           rgba(255,255,255,0.55);
+    --hover-wash:     rgba(255,255,255,0.05);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--page);
+    color: var(--text-primary);
+    font: 14px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding-block: 40px;
+    padding-inline: 20px;
+  }
+  .wrap { max-width: 820px; margin: 0 auto; }
+  .card {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px 28px 22px;
+  }
+  @media (max-width: 560px) { .card { padding: 20px 14px 16px; } }
+
+  h1 { font-size: 21px; line-height: 1.25; font-weight: 600; margin: 0 0 6px; letter-spacing: -0.01em; }
+  .sub { margin: 0; color: var(--text-secondary); font-size: 13.5px; max-width: 66ch; }
+
+  /* ---- view toggle ---- */
+  .controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin: 18px 0 0; }
+  .controls > span { font-size: 12px; color: var(--text-secondary); }
+  .seg { display: inline-flex; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+  .seg button {
+    background: transparent; border: 0; border-left: 1px solid var(--border);
+    font: inherit; font-size: 12px; padding: 5px 10px;
+    color: var(--text-secondary); cursor: pointer;
+  }
+  .seg button:first-child { border-left: 0; }
+  .seg button:hover { background: var(--hover-wash); }
+  .seg button[aria-pressed="true"] { background: var(--hover-wash); color: var(--text-primary); font-weight: 600; }
+
+  /* ---- legend: fill, pattern, position and line style — never colour alone ---- */
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 10px 18px;
+    margin: 12px 0 0; padding: 0; list-style: none;
+    font-size: 12.5px; color: var(--text-secondary);
+  }
+  .legend li { display: flex; align-items: center; gap: 7px; }
+  .swatch { width: 13px; height: 13px; border-radius: 2px; flex: none; }
+  .swatch.movie { background: var(--series-movie); }
+  .swatch.tv {
+    background-color: var(--series-tv);
+    background-image: repeating-linear-gradient(45deg, var(--hatch) 0 2px, transparent 2px 5px);
+  }
+  .swatch.lkey { width: 28px; height: 10px; border-radius: 0; color: var(--line-ink); }
+  .swatch.lkey svg { display: block; }
+
+  /* ---- chart ---- */
+  .chart { --gut: 78px; --gutR: 54px; --plotH: 400px; margin-top: 16px; }
+  @media (max-width: 560px) { .chart { --gut: 60px; --gutR: 44px; --plotH: 360px; } }
+
+  .titles { display: grid; grid-template-columns: 1fr auto; gap: 8px; margin-bottom: 5px; }
+  .ytitleL { font-size: 11px; color: var(--text-secondary); }
+  .ytitleR { font-size: 11px; color: var(--text-secondary); text-align: right; }
+
+  .plotrow { display: grid; grid-template-columns: var(--gut) 1fr var(--gutR); }
+  .yaxis { position: relative; height: var(--plotH); }
+  .ytick {
+    position: absolute; transform: translateY(-50%);
+    font-size: 11px; color: var(--text-muted);
+    font-variant-numeric: tabular-nums; white-space: nowrap;
+  }
+  .yaxis.left .ytick  { right: 10px; }
+  .yaxis.right .ytick { left: 10px; }
+
+  .plot { position: relative; height: var(--plotH); }
+  .grid, .cols, .line, .pts, .anno { position: absolute; inset: 0; }
+  .gridline { position: absolute; left: 0; right: 0; height: 1px; background: var(--gridline); }
+  .gridline[data-zero] { background: var(--baseline); }
+
+  /* stacked volume bars */
+  .cols { display: grid; grid-template-columns: repeat(7, 1fr); align-items: end; }
+  .col {
+    display: flex; flex-direction: column; justify-content: flex-end;
+    height: 100%; width: 100%; max-width: 24px; margin: 0 auto;
+  }
+  .total {
+    font-size: 11px; font-weight: 600; color: var(--text-primary);
+    text-align: center; white-space: nowrap;
+    font-variant-numeric: tabular-nums; margin-bottom: 3px;
+  }
+  .seg { width: 100%; }
+  .seg.tv {
+    background-color: var(--series-tv);
+    background-image: repeating-linear-gradient(45deg, var(--hatch) 0 2px, transparent 2px 5px);
+    border-radius: 4px 4px 0 0;          /* rounded data-end, square at the baseline */
+    margin-bottom: 2px;                  /* 2px surface gap between the two fills */
+  }
+  .seg.movie { background: var(--series-movie); }
+
+  /* TV-share line (right axis): dashed + ringed markers, so it survives greyscale */
+  .line { pointer-events: none; }
+  .line svg { width: 100%; height: 100%; display: block; overflow: visible; }
+  .line .mk { pointer-events: auto; cursor: default; }
+
+  .pts { pointer-events: none; }
+  .plabel {
+    position: absolute; transform: translateX(-50%);
+    font-size: 10.5px; font-weight: 600; color: var(--text-primary);
+    font-variant-numeric: tabular-nums; white-space: nowrap;
+    background: var(--surface-1); padding: 0 3px; border-radius: 2px;
+  }
+
+  /* ---- annotations, anchored to the line ---- */
+  .anno { pointer-events: none; }
+  .callout { position: absolute; width: 0; }
+  .callout .txt {
+    position: absolute; bottom: var(--lead);
+    font-size: 11px; line-height: 1.35; color: var(--text-secondary);
+    white-space: nowrap;
+    background: var(--surface-1); padding: 1px 4px; border-radius: 2px;
+  }
+  .callout .txt b { color: var(--text-primary); font-weight: 600; }
+  .callout .txt .qual { color: var(--text-muted); }
+  .callout[data-align="center"] .txt { transform: translateX(-50%); text-align: center; }
+  .callout[data-align="right"]  .txt { right: 0; text-align: right; }
+  .callout[data-align="left"]   .txt { left: 0;  text-align: left; }
+  .callout .txt .n { display: none; }
+  @media (max-width: 640px) {
+    /* the anchor is 0-wide, so the text box needs a real width, not just a cap */
+    .callout .txt { white-space: normal; width: 116px; font-size: 10.5px; }
+    .callout .txt .w { display: none; }
+    .callout .txt .n { display: inline; }
+  }
+  .callout .leader {
+    position: absolute; bottom: 9px; width: 1px;
+    height: calc(var(--lead) - 13px);
+    background: var(--anno);
+  }
+  .callout[data-align="center"] .leader { left: 0; }
+  .callout[data-align="right"]  .leader { right: 0; }
+  .callout[data-align="left"]   .leader { left: 0; }
+
+  /* ---- x axis + count strip ---- */
+  .xrow, .strip { display: grid; grid-template-columns: var(--gut) repeat(7, 1fr) var(--gutR); }
+  .xrow { border-top: 1px solid var(--baseline); padding-top: 5px; }
+  .xrow .yr {
+    text-align: center; font-size: 12px; font-weight: 600;
+    color: var(--text-primary); font-variant-numeric: tabular-nums;
+  }
+  .strip { margin-top: 8px; border-top: 1px solid var(--border); }
+  .strip .rlab {
+    text-align: right; padding: 4px 10px 4px 0;
+    font-size: 11px; color: var(--text-secondary); white-space: nowrap;
+  }
+  .strip .cell {
+    text-align: center; padding: 4px 2px;
+    font-size: 11.5px; color: var(--text-secondary);
+    font-variant-numeric: tabular-nums;
+  }
+  /* at phone width the bar totals would collide with the line's % labels;
+     the strip and the table carry those counts instead */
+  @media (max-width: 560px) {
+    .total { display: none; }
+    .xrow .yr { font-size: 11px; }
+    .strip .rlab { font-size: 10px; padding-right: 6px; }
+    .strip .cell { font-size: 10.5px; padding-inline: 1px; }
+  }
+  .xtitle {
+    text-align: center; font-size: 11.5px; color: var(--text-secondary);
+    margin-top: 12px; padding-left: var(--gut); padding-right: var(--gutR);
+  }
+
+  /* ---- notes ---- */
+  .note {
+    margin: 20px 0 0; padding-top: 14px; border-top: 1px solid var(--border);
+    font-size: 12px; color: var(--text-muted); max-width: 80ch;
+  }
+  .note p { margin: 0 0 7px; }
+  .note p:last-child { margin-bottom: 0; }
+  .note strong { color: var(--text-secondary); font-weight: 600; }
+
+  .toggle {
+    margin-top: 14px; background: transparent;
+    border: 1px solid var(--border); border-radius: 6px; padding: 5px 10px;
+    font: inherit; font-size: 12px; color: var(--text-secondary); cursor: pointer;
+  }
+  .toggle:hover { background: var(--hover-wash); }
+  table { border-collapse: collapse; width: 100%; margin-top: 14px; font-size: 12.5px; }
+  caption { text-align: left; color: var(--text-secondary); font-size: 12px; padding-bottom: 8px; }
+  th, td { padding: 6px 8px; border-bottom: 1px solid var(--border); text-align: right; }
+  th:first-child, td:first-child { text-align: left; }
+  thead th { color: var(--text-secondary); font-weight: 600; }
+  tbody td { font-variant-numeric: tabular-nums; color: var(--text-primary); }
+  tbody tr[data-mark] td, tbody tr[data-mark] th { font-weight: 600; color: var(--text-primary); }
+  .tablewrap { overflow-x: auto; }
+
+  /* ---- tooltip ---- */
+  #tt {
+    position: fixed; z-index: 10;
+    background: var(--surface-1); border: 1px solid var(--border);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.12); border-radius: 6px;
+    padding: 7px 10px; font-size: 12px; line-height: 1.45;
+    color: var(--text-primary); pointer-events: none; white-space: nowrap;
+  }
+  #tt .tthead { font-weight: 600; margin-bottom: 2px; }
+  #tt .ttrow { color: var(--text-secondary); display: flex; align-items: center; gap: 6px; }
+  #tt b { color: var(--text-primary); font-variant-numeric: tabular-nums; }
+
+  @media (forced-colors: active) {
+    .seg, .swatch { forced-color-adjust: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <h1 id="h1"></h1>
+    <p class="sub" id="sub"></p>
+
+    <div class="controls">
+      <span>Year dimension</span>
+      <span class="seg" role="group" aria-label="Year dimension">
+        <button type="button" id="v-added" aria-pressed="true">Added to Netflix</button>
+        <button type="button" id="v-released" aria-pressed="false">Released</button>
+      </span>
+    </div>
+
+    <ul class="legend">
+      <li><span class="swatch movie" aria-hidden="true"></span> Movies (solid, lower block)</li>
+      <li><span class="swatch tv" aria-hidden="true"></span> TV Shows (hatched, upper block)</li>
+      <li>
+        <span class="swatch lkey" aria-hidden="true"><svg viewBox="0 0 28 10" width="28" height="10">
+          <line x1="0" y1="5" x2="28" y2="5" stroke="currentColor" stroke-width="2" stroke-dasharray="6 4"/>
+          <circle cx="14" cy="5" r="4" fill="currentColor" stroke="var(--surface-1)" stroke-width="2"/>
+        </svg></span>
+        TV share (dashed line, right axis)
+      </li>
+    </ul>
+
+    <div class="chart" id="chart">
+      <div class="titles">
+        <div class="ytitleL" id="ytitleL"></div>
+        <div class="ytitleR">Share that are TV shows — line, right axis</div>
+      </div>
+      <div class="plotrow">
+        <div class="yaxis left" id="yaxisL"></div>
+        <div class="plot" id="plot">
+          <div class="grid" id="grid"></div>
+          <div class="cols" id="cols"></div>
+          <div class="line" id="line"></div>
+          <div class="pts" id="pts"></div>
+          <div class="anno" id="anno"></div>
+        </div>
+        <div class="yaxis right" id="yaxisR"></div>
+      </div>
+      <div class="xrow" id="xrow"></div>
+      <div class="strip" id="strip"></div>
+      <div class="xtitle" id="xtitle"></div>
+    </div>
+
+    <div class="note" id="note"></div>
+
+    <button class="toggle" id="toggle" aria-expanded="false" aria-controls="datatable">Show data table</button>
+    <div class="tablewrap"><table id="datatable" hidden></table></div>
+  </div>
+</div>
+
+<script>
+// Both series pre-aggregated from netflix_titles.csv (8,807 rows); only these 14 summary
+// rows are embedded. "added" groups by the year in date_added, "released" by release_year.
+const SERIES = {
+  added: [
+    { year: 2015, movies:   56, tv:  26 },
+    { year: 2016, movies:  253, tv: 176 },
+    { year: 2017, movies:  839, tv: 349 },
+    { year: 2018, movies: 1237, tv: 412 },
+    { year: 2019, movies: 1424, tv: 592 },
+    { year: 2020, movies: 1284, tv: 595 },
+    { year: 2021, movies:  993, tv: 505 }
+  ],
+  released: [
+    { year: 2015, movies:  398, tv: 162 },
+    { year: 2016, movies:  658, tv: 244 },
+    { year: 2017, movies:  767, tv: 265 },
+    { year: 2018, movies:  767, tv: 380 },
+    { year: 2019, movies:  633, tv: 397 },
+    { year: 2020, movies:  517, tv: 436 },
+    { year: 2021, movies:  277, tv: 315 }
+  ]
+};
+
+// Shared scales, so switching views compares like with like.
+const L_DOMAIN = 5500, L_TICKS = [0, 1000, 2000, 3000];         // counts — bars
+const R_DOMAIN = 60,   R_TICKS = [0, 10, 20, 30, 40, 50, 60];   // per cent TV — line
+const fmt = n => n.toLocaleString("en-US");
+const pct1 = n => n.toFixed(1) + "%";
+
+const prep = rows => rows.map(d => {
+  const total = d.movies + d.tv;
+  return { ...d, total, pct: (d.tv / total) * 100 };
+});
+
+const SHARED_NOTE = `
+  <p><strong>Two scales, read separately.</strong> Bars use the left axis (title counts); the
+    dashed line uses the right axis (% TV). Both start at zero, neither is truncated, and both
+    views share the same two scales so the toggle is a fair comparison — but where the line
+    happens to sit relative to a bar top carries no meaning, only its own up-and-down does.</p>
+  <p><strong>The two views do not tell the same story.</strong> By date added, TV share dips to
+    25% in 2018 and recovers to 34% — a modest tilt. By release year it dips to 26% in 2017 and
+    then climbs much harder, to 53% for 2021 releases, where TV titles outnumber movies. Part of
+    that gap is how a catalogue is built rather than what Netflix bought: its movie library leans
+    on older back-catalogue spread across many release years, while series tend to arrive close to
+    release, so recent release years skew toward TV. Treat the "added" view as the better read on
+    recent acquisition behaviour.</p>`;
+
+const VIEWS = {
+  added: {
+    rows: prep(SERIES.added),
+    h1: "Netflix's additions tilted back toward TV after 2018 — but mostly because it slowed down on movies",
+    sub: "Titles added each year by the year Netflix added them, split by type. " +
+         "The TV share fell to a low of 25% in 2018, then climbed three years straight to 34% in 2021.",
+    ytitleL: "Titles added — bars, left axis",
+    xtitle: 'Year added to Netflix (<code>date_added</code>)',
+    caption: "Titles added to Netflix per year by type, 2015–2021, from <code>date_added</code>.",
+    volLead: 68,
+    tvLead: 26,
+    volTxt: p => [`<b>Peak volume: ${fmt(p.total)} added</b><br>in ${p.year} · ${Math.round(p.pct)}% TV`,
+                  `<b>Peak: ${fmt(p.total)}</b><br>${p.year} · ${Math.round(p.pct)}% TV`],
+    tvTxt:  p => [`<b>Highest TV share: ${pct1(p.pct)} in ${p.year}</b><br>` +
+                  `<span class="qual">— from only ${fmt(p.total)} additions</span>`,
+                  `<b>Top TV share:</b><br><b>${pct1(p.pct)} (${p.year})</b>`],
+    note: `
+      <p><strong>The mix moved by subtraction.</strong> Additions peaked in 2019 and have fallen
+        since. From 2020 to 2021 movie additions dropped 23% (1,284 → 993) while TV dropped only
+        15% (595 → 505), so the recent tilt toward TV owes more to fewer movies than to more
+        series.</p>
+      <p><strong>Read the 2016 peak with care.</strong> Its 41% TV share comes from just 429
+        additions — a fifth of 2019's volume — so a few dozen titles move it several points.</p>
+      <p><strong>What's counted:</strong> one row per title, by the year in <code>date_added</code>
+        — the year Netflix added it, not its release year. Titles are not split by country. 10 rows
+        have a missing or unparseable <code>date_added</code> and are dropped; 56 dated titles were
+        added before 2015. That leaves <strong>8,741 of 8,807 titles</strong> in this view.</p>`
+  },
+  released: {
+    rows: prep(SERIES.released),
+    h1: "By release year, Netflix's TV share climbs without a real recovery story — 26% in 2017 to 53% in 2021",
+    sub: "Catalogue titles grouped by the year they were released, split by type. " +
+         "The TV share dips only slightly to 26% in 2017, then rises four years straight past the halfway mark.",
+    ytitleL: "Titles in catalogue — bars, left axis",
+    xtitle: 'Original release year (<code>release_year</code>)',
+    caption: "Netflix catalogue titles by original release year and type, 2015–2021, from <code>release_year</code>.",
+    volLead: 68,
+    tvLead: 14,
+    volTxt: p => [`<b>Peak volume: ${fmt(p.total)} titles</b><br>released in ${p.year} · ${Math.round(p.pct)}% TV`,
+                  `<b>Peak: ${fmt(p.total)}</b><br>${p.year} · ${Math.round(p.pct)}% TV`],
+    tvTxt:  p => [`<b>Highest TV share: ${pct1(p.pct)} in ${p.year}</b>`,
+                  `<b>Top: ${pct1(p.pct)} (${p.year})</b>`],
+    note: `
+      <p><strong>2021 is a part year.</strong> This snapshot of the catalogue ends in 2021, so only
+        592 titles carry that release year against 953–1,147 for 2018–2020. Its 53% TV share is the
+        highest here, but it rests on the smallest and least complete year in the window.</p>
+      <p><strong>Why this curve is steeper.</strong> A catalogue holds movies from decades of
+        release years but series mostly from recent ones, so the share of TV rises as the release
+        year approaches the snapshot date — independent of what Netflix was buying.</p>
+      <p><strong>What's counted:</strong> one row per title, by <code>release_year</code>. Every row
+        has a usable value, but <strong>2,591 titles released outside 2015–2021</strong> (nearly all
+        earlier — the catalogue reaches back to 1925) fall outside the window. That leaves
+        <strong>6,216 of 8,807 titles</strong> in this view.</p>`
+  }
+};
+
+const SOURCE_NOTE = `
+  <p>Source: <code>netflix_titles.csv</code> — the <code>type</code> column with
+    <code>date_added</code> or <code>release_year</code>, aggregated from 8,807 rows to the
+    7 summary rows per view embedded in this page.</p>`;
+
+const bandCenter = i => ((i + 0.5) / 7) * 100;              // % across the plot
+const lineY = d => (1 - d.pct / R_DOMAIN) * 100;            // % down from the plot top
+const alignFor = i => (i === 0 ? "left" : i === 6 ? "right" : "center");
+
+// ---- axes and gridlines: shared by both views, built once ----
+document.getElementById("yaxisL").innerHTML = L_TICKS.map(t =>
+  `<div class="ytick" style="top:${(1 - t / L_DOMAIN) * 100}%">${fmt(t)}</div>`
+).join("");
+document.getElementById("yaxisR").innerHTML = R_TICKS.map(t =>
+  `<div class="ytick" style="top:${(1 - t / R_DOMAIN) * 100}%">${t}%</div>`
+).join("");
+// gridlines follow the left (bar) axis only, so the two scales never look interchangeable
+document.getElementById("grid").innerHTML = L_TICKS.map(t =>
+  `<div class="gridline"${t === 0 ? " data-zero" : ""} style="top:${(1 - t / L_DOMAIN) * 100}%"></div>`
+).join("");
+document.getElementById("xrow").innerHTML =
+  `<div></div>` + VIEWS.added.rows.map(d => `<div class="yr">${d.year}</div>`).join("") + `<div></div>`;
+
+const plot = document.getElementById("plot");
+let view = "added";
+let rows = VIEWS.added.rows;
+
+// ---- the TV-share line, drawn in pixel space so dashes and markers stay undistorted ----
+function drawLine() {
+  const { width: W, height: H } = plot.getBoundingClientRect();
+  if (!W || !H) return;
+  const pt = (d, i) => [ (bandCenter(i) / 100) * W, (lineY(d) / 100) * H ];
+  const path = rows.map((d, i) => pt(d, i).map(n => n.toFixed(1)).join(" "))
+                   .map((p, i) => (i ? "L " : "M ") + p).join(" ");
+  const marks = rows.map((d, i) => {
+    const [x, y] = pt(d, i);
+    return `<circle class="mk" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="4.5"
+             fill="var(--line-ink)" stroke="var(--surface-1)" stroke-width="2"
+             data-y="${d.year}" data-v="${d.tv}" data-t="${d.total}" data-p="${pct1(d.pct)}"
+             role="img" aria-label="${d.year}: ${pct1(d.pct)} of these titles are TV shows"/>`;
+  }).join("");
+  document.getElementById("line").innerHTML =
+    `<svg viewBox="0 0 ${W.toFixed(1)} ${H.toFixed(1)}" preserveAspectRatio="none">
+       <path d="${path}" fill="none" stroke="var(--line-ink)" stroke-width="2"
+             stroke-dasharray="7 4" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+       ${marks}
+     </svg>`;
+}
+
+function render() {
+  const v = VIEWS[view];
+  rows = v.rows;
+  const peakVol = rows.reduce((a, b) => (b.total > a.total ? b : a));
+  const peakTV  = rows.reduce((a, b) => (b.pct   > a.pct   ? b : a));
+  const iVol = rows.indexOf(peakVol), iTV = rows.indexOf(peakTV);
+
+  document.getElementById("h1").textContent = v.h1;
+  document.getElementById("sub").textContent = v.sub;
+  document.getElementById("ytitleL").textContent = v.ytitleL;
+  document.getElementById("xtitle").innerHTML = v.xtitle;
+  document.getElementById("note").innerHTML = SHARED_NOTE + v.note + SOURCE_NOTE;
+
+  // stacked bars: Movies always the lower block, TV Shows the hatched upper block
+  document.getElementById("cols").innerHTML = rows.map(d => {
+    const seg = (cls, label, val) =>
+      `<div class="seg ${cls}" style="height:${(val / L_DOMAIN) * 100}%"
+            data-y="${d.year}" data-s="${label}" data-v="${val}"
+            data-t="${d.total}" data-p="${pct1(d.pct)}"
+            role="img" aria-label="${d.year}, ${label}: ${fmt(val)} titles"></div>`;
+    return `<div class="col">
+      <div class="total">${fmt(d.total)}</div>
+      ${seg("tv", "TV Shows", d.tv)}
+      ${seg("movie", "Movies", d.movies)}
+    </div>`;
+  }).join("");
+
+  drawLine();
+
+  // per-year value labels riding the line (the two annotated years carry theirs in a call-out)
+  document.getElementById("pts").innerHTML = rows.map((d, i) =>
+    (i === iTV || i === iVol) ? "" :
+    `<div class="plabel" style="left:${bandCenter(i)}%; top:calc(${lineY(d)}% - 20px)">${Math.round(d.pct)}%</div>`
+  ).join("");
+
+  // the two call-outs, anchored to their line markers
+  const callout = (i, d, lead, txt, align) => `
+    <div class="callout" data-align="${align}"
+         style="left:${bandCenter(i)}%; top:0; bottom:${100 - lineY(d)}%; --lead:${lead}px">
+      <div class="txt"><span class="w">${txt[0]}</span><span class="n">${txt[1]}</span></div>
+      <div class="leader"></div>
+    </div>`;
+  document.getElementById("anno").innerHTML =
+    callout(iVol, peakVol, v.volLead, v.volTxt(peakVol), alignFor(iVol)) +
+    callout(iTV,  peakTV,  v.tvLead,  v.tvTxt(peakTV),   alignFor(iTV));
+
+  // count strip
+  const stripRow = (label, cells) =>
+    `<div style="display:contents"><div class="rlab">${label}</div>` +
+    cells.map(c => `<div class="cell">${c}</div>`).join("") + `<div></div></div>`;
+  document.getElementById("strip").innerHTML =
+    stripRow("Movies",   rows.map(d => fmt(d.movies))) +
+    stripRow("TV shows", rows.map(d => fmt(d.tv)));
+
+  // data table: the backup reference for every number on the chart
+  document.getElementById("datatable").innerHTML =
+    `<caption>${v.caption} Bold rows are the peak-volume year and the highest-TV-share year.</caption>
+     <thead><tr><th scope="col">Year</th><th scope="col">Movies</th><th scope="col">TV Shows</th>
+       <th scope="col">Total</th><th scope="col">Share TV</th></tr></thead>
+     <tbody>${rows.map((d, i) => {
+       const mark = (i === iVol || i === iTV) ? " data-mark" : "";
+       return `<tr${mark}><th scope="row">${d.year}</th><td>${fmt(d.movies)}</td>
+         <td>${fmt(d.tv)}</td><td>${fmt(d.total)}</td><td>${pct1(d.pct)}</td></tr>`;
+     }).join("")}</tbody>`;
+}
+
+for (const [key, id] of [["added", "v-added"], ["released", "v-released"]]) {
+  document.getElementById(id).addEventListener("click", () => {
+    view = key;
+    document.getElementById("v-added").setAttribute("aria-pressed", String(key === "added"));
+    document.getElementById("v-released").setAttribute("aria-pressed", String(key === "released"));
+    render();
+  });
+}
+render();
+
+let rt;
+window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(drawLine, 120); });
+
+// ---- hover tooltip: bars and line markers ----
+const tt = document.createElement("div");
+tt.id = "tt"; tt.hidden = true; document.body.appendChild(tt);
+plot.addEventListener("mousemove", e => {
+  const m = e.target.closest(".seg, .mk");
+  if (!m) { tt.hidden = true; return; }
+  const isMark = m.classList.contains("mk");
+  const val = +m.dataset.v, t = +m.dataset.t;
+  const head = `<div class="tthead">${m.dataset.y}</div>`;
+  tt.innerHTML = isMark
+    ? head + `<div class="ttrow">TV share: <b>${m.dataset.p}</b> of this year's titles</div>
+              <div class="ttrow"><b>${fmt(val)}</b> TV shows of <b>${fmt(t)}</b></div>`
+    : head + `<div class="ttrow"><span class="swatch ${m.classList.contains("tv") ? "tv" : "movie"}"></span>
+                ${m.dataset.s}: <b>${fmt(val)}</b> (${Math.round((val / t) * 100)}% of the year)</div>
+              <div class="ttrow">Year total: <b>${fmt(t)}</b> · <b>${m.dataset.p}</b> TV</div>`;
+  tt.hidden = false;
+  const r = tt.getBoundingClientRect();
+  tt.style.left = Math.min(e.clientX + 14, window.innerWidth - r.width - 8) + "px";
+  tt.style.top  = Math.max(e.clientY - r.height - 12, 8) + "px";
+});
+plot.addEventListener("mouseleave", () => { tt.hidden = true; });
+
+const btn = document.getElementById("toggle");
+const table = document.getElementById("datatable");
+btn.addEventListener("click", () => {
+  const open = table.hidden;
+  table.hidden = !open;
+  btn.setAttribute("aria-expanded", String(open));
+  btn.textContent = open ? "Hide data table" : "Show data table";
+});
+</script>
+</body>
+</html>
