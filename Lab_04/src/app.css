@@ -1,0 +1,107 @@
+/*
+ * Design tokens + chart chrome. These live in a global stylesheet because D3
+ * creates the axis elements at runtime, where Svelte's scoped class never lands.
+ */
+:root {
+	color-scheme: light;
+
+	--page: #f9f9f7;
+	--surface-1: #fcfcfb;
+	--text-primary: #0b0b0b;
+	--text-secondary: #52514e;
+	--text-muted: #898781;
+	--gridline: #e1e0d9;
+	--axis: #c3c2b7;
+	--border: rgba(11, 11, 11, 0.1);
+	--series-1: #2a78d6;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme='light']) {
+		color-scheme: dark;
+
+		--page: #0d0d0d;
+		--surface-1: #1a1a19;
+		--text-primary: #ffffff;
+		--text-secondary: #c3c2b7;
+		--text-muted: #898781;
+		--gridline: #2c2c2a;
+		--axis: #383835;
+		--border: rgba(255, 255, 255, 0.1);
+		--series-1: #3987e5;
+	}
+}
+
+:root[data-theme='dark'] {
+	color-scheme: dark;
+
+	--page: #0d0d0d;
+	--surface-1: #1a1a19;
+	--text-primary: #ffffff;
+	--text-secondary: #c3c2b7;
+	--text-muted: #898781;
+	--gridline: #2c2c2a;
+	--axis: #383835;
+	--border: rgba(255, 255, 255, 0.1);
+	--series-1: #3987e5;
+}
+
+body {
+	margin: 0;
+	background: var(--page);
+	color: var(--text-primary);
+	font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+	-webkit-font-smoothing: antialiased;
+}
+
+/* --- chart chrome ------------------------------------------------------- */
+
+.chart {
+	margin: 0;
+	background: var(--surface-1);
+	border: 1px solid var(--border);
+	border-radius: 10px;
+	padding: 18px 20px 12px;
+}
+
+.chart figcaption h2 {
+	margin: 0;
+	font-size: 1rem;
+	font-weight: 600;
+	color: var(--text-primary);
+}
+
+.chart figcaption p {
+	margin: 4px 0 12px;
+	max-width: 70ch;
+	font-size: 0.8125rem;
+	line-height: 1.5;
+	color: var(--text-secondary);
+}
+
+.chart svg {
+	display: block;
+	width: 100%;
+	height: auto;
+	overflow: visible;
+}
+
+.axis text {
+	fill: var(--text-muted);
+	font-size: 11px;
+	font-variant-numeric: tabular-nums;
+}
+
+.axis .domain,
+.axis .tick line {
+	stroke: var(--axis);
+}
+
+.grid .tick line {
+	stroke: var(--gridline);
+}
+
+.axis-title {
+	fill: var(--text-secondary);
+	font-size: 12px;
+}
