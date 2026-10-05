@@ -1,7 +1,7 @@
 <script>
 	import * as d3 from 'd3';
 
-	let { songs = [] } = $props();
+	let { songs = [], scope = '' } = $props();
 
 	const count = d3.format(',');
 	const oneDecimal = d3.format('.1f');
@@ -15,7 +15,7 @@
 			label: 'Songs that reached #1',
 			value: count(songs.length),
 			unit: 'songs',
-			note: 'One row per song, not per chart-week'
+			note: `One row per song, not per chart-week`
 		},
 		{
 			label: 'Average tempo',
@@ -27,10 +27,14 @@
 			label: 'Average time at #1',
 			value: weeks.length ? oneDecimal(d3.mean(weeks)) : '—',
 			unit: 'weeks',
-			note: `Mean of ${count(weeks.length)} songs; range 1–19 weeks`
+			note: weeks.length
+				? `Mean of ${count(weeks.length)} songs; range ${d3.min(weeks)}–${d3.max(weeks)} weeks`
+				: 'No songs selected'
 		}
 	]);
 </script>
+
+<p class="kpi-scope">Summarising <strong>{scope}</strong> — every figure below is for this selection.</p>
 
 <div class="kpi-row">
 	{#each cards as card (card.label)}
@@ -45,6 +49,12 @@
 </div>
 
 <style>
+	.kpi-scope {
+		margin: 0 0 12px;
+		font-size: 0.8125rem;
+		color: var(--text-secondary);
+	}
+
 	.kpi-row {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
