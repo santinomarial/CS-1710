@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "checkedAt": "2026-10-26T22:07:43.097Z",
+  "source": "http://127.0.0.1:5174/airbnb_boston_cambridge.csv",
+  "columns": 12,
+  "numericColumns": [
+    "latitude",
+    "longitude",
+    "price",
+    "minimum_nights",
+    "number_of_reviews",
+    "reviews_per_month",
+    "availability_365",
+    "number_of_reviews_ltm"
+  ],
+  "listings": 4777,
+  "roomTypes": {
+    "Private room": 1666,
+    "Entire home/apt": 3014,
+    "Hotel room": 97
+  },
+  "cities": {
+    "Boston": 3705,
+    "Cambridge": 1072
+  },
+  "price": {
+    "min": 8,
+    "max": 1995,
+    "median": 269
+  },
+  "optionalSlice": "Not available locally; download airbnb_slice20.csv from Canvas or the course download folder."
+}
