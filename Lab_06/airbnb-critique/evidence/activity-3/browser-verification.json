@@ -1,0 +1,13 @@
+{
+  "title": "Boston and Cambridge Airbnb listings | Lab 6 baseline",
+  "marks": 4777,
+  "legend": "Entire home/apt\nPrivate room\nHotel room",
+  "invalidMarks": 0,
+  "errors": [],
+  "viewport": {
+    "width": 1280,
+    "height": 1000
+  },
+  "checkedAt": "2026-10-26T22:19:55.616Z",
+  "simulationsPerformed": false
+}
