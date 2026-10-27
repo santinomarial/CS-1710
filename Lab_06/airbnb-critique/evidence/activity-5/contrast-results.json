@@ -1,0 +1,256 @@
+{
+  "checkedAt": "2026-10-27T00:02:04.980Z",
+  "method": "WCAG relative luminance and contrast; sRGB source-over opacity compositing before linearization",
+  "rounding": "Ratios use unrounded RGB composites; hex values are nearest 8-bit display colors",
+  "styles": {
+    "body": {
+      "fill": "rgb(0, 0, 0)",
+      "color": "rgb(34, 34, 34)",
+      "opacity": "1",
+      "stroke": "none",
+      "strokeWidth": "1px",
+      "background": "rgb(255, 255, 255)"
+    },
+    "main": {
+      "fill": "rgb(0, 0, 0)",
+      "color": "rgb(34, 34, 34)",
+      "opacity": "1",
+      "stroke": "none",
+      "strokeWidth": "1px",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "texts": [
+      {
+        "name": "X tick",
+        "fill": "rgb(68, 68, 68)",
+        "color": "rgb(34, 34, 34)",
+        "opacity": "1",
+        "stroke": "none",
+        "strokeWidth": "1px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      {
+        "name": "Y tick",
+        "fill": "rgb(68, 68, 68)",
+        "color": "rgb(34, 34, 34)",
+        "opacity": "1",
+        "stroke": "none",
+        "strokeWidth": "1px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      {
+        "name": "X title",
+        "fill": "rgb(51, 51, 51)",
+        "color": "rgb(34, 34, 34)",
+        "opacity": "1",
+        "stroke": "none",
+        "strokeWidth": "1px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      {
+        "name": "Y title",
+        "fill": "rgb(51, 51, 51)",
+        "color": "rgb(34, 34, 34)",
+        "opacity": "1",
+        "stroke": "none",
+        "strokeWidth": "1px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      {
+        "name": "Legend text",
+        "fill": "rgb(0, 0, 0)",
+        "color": "rgb(34, 34, 34)",
+        "opacity": "1",
+        "stroke": "none",
+        "strokeWidth": "1px",
+        "background": "rgba(0, 0, 0, 0)"
+      }
+    ],
+    "marks": [
+      {
+        "fill": "rgb(255, 127, 14)",
+        "color": "rgb(34, 34, 34)",
+        "opacity": "0.65",
+        "stroke": "rgb(51, 51, 51)",
+        "strokeWidth": "0.75px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      {
+        "fill": "rgb(31, 119, 180)",
+        "color": "rgb(34, 34, 34)",
+        "opacity": "0.65",
+        "stroke": "rgb(51, 51, 51)",
+        "strokeWidth": "0.75px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      {
+        "fill": "rgb(44, 160, 44)",
+        "color": "rgb(34, 34, 34)",
+        "opacity": "0.65",
+        "stroke": "rgb(51, 51, 51)",
+        "strokeWidth": "0.75px",
+        "background": "rgba(0, 0, 0, 0)"
+      }
+    ],
+    "legend": [
+      {
+        "fill": "rgb(31, 119, 180)",
+        "color": "rgb(34, 34, 34)",
+        "opacity": "1",
+        "stroke": "rgb(51, 51, 51)",
+        "strokeWidth": "0.75px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      {
+        "fill": "rgb(255, 127, 14)",
+        "color": "rgb(34, 34, 34)",
+        "opacity": "1",
+        "stroke": "rgb(51, 51, 51)",
+        "strokeWidth": "0.75px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      {
+        "fill": "rgb(44, 160, 44)",
+        "color": "rgb(34, 34, 34)",
+        "opacity": "1",
+        "stroke": "rgb(51, 51, 51)",
+        "strokeWidth": "0.75px",
+        "background": "rgba(0, 0, 0, 0)"
+      }
+    ]
+  },
+  "rows": [
+    {
+      "element": "X tick",
+      "source": "rgb(68, 68, 68)",
+      "foreground": "#444444",
+      "background": "#FFFFFF",
+      "ratio": 9.739769120526205,
+      "threshold": 4.5,
+      "result": "PASS",
+      "scope": "Unobscured text on page background"
+    },
+    {
+      "element": "Y tick",
+      "source": "rgb(68, 68, 68)",
+      "foreground": "#444444",
+      "background": "#FFFFFF",
+      "ratio": 9.739769120526205,
+      "threshold": 4.5,
+      "result": "PASS",
+      "scope": "Unobscured text on page background"
+    },
+    {
+      "element": "X title",
+      "source": "rgb(51, 51, 51)",
+      "foreground": "#333333",
+      "background": "#FFFFFF",
+      "ratio": 12.63465434445799,
+      "threshold": 4.5,
+      "result": "PASS",
+      "scope": "Unobscured text on page background"
+    },
+    {
+      "element": "Y title",
+      "source": "rgb(51, 51, 51)",
+      "foreground": "#333333",
+      "background": "#FFFFFF",
+      "ratio": 12.63465434445799,
+      "threshold": 4.5,
+      "result": "PASS",
+      "scope": "Unobscured text on page background"
+    },
+    {
+      "element": "Legend text",
+      "source": "rgb(34, 34, 34)",
+      "foreground": "#222222",
+      "background": "#FFFFFF",
+      "ratio": 15.909984431773273,
+      "threshold": 4.5,
+      "result": "PASS",
+      "scope": "Unobscured text on page background"
+    },
+    {
+      "element": "Private room fill",
+      "source": "rgb(255, 127, 14) at 0.65",
+      "foreground": "#FFAC62",
+      "background": "#FFFFFF",
+      "ratio": 1.8558633341796744,
+      "threshold": 3,
+      "result": "FAIL",
+      "scope": "Isolated fill over white"
+    },
+    {
+      "element": "Entire home/apt fill",
+      "source": "rgb(31, 119, 180) at 0.65",
+      "foreground": "#6DA7CE",
+      "background": "#FFFFFF",
+      "ratio": 2.609595192691926,
+      "threshold": 3,
+      "result": "FAIL",
+      "scope": "Isolated fill over white"
+    },
+    {
+      "element": "Hotel room fill",
+      "source": "rgb(44, 160, 44) at 0.65",
+      "foreground": "#76C176",
+      "background": "#FFFFFF",
+      "ratio": 2.169598146580682,
+      "threshold": 3,
+      "result": "FAIL",
+      "scope": "Isolated fill over white"
+    },
+    {
+      "element": "Data outline on white",
+      "source": "rgb(51, 51, 51) at 0.65",
+      "foreground": "#7A7A7A",
+      "background": "#FFFFFF",
+      "ratio": 4.268393678994859,
+      "threshold": 3,
+      "result": "PASS",
+      "scope": "Exposed outer boundary against white"
+    },
+    {
+      "element": "Outline over Private room fill",
+      "source": "rgb(51, 51, 51) at 0.65",
+      "foreground": "#7A5D44",
+      "background": "#FFAC62",
+      "ratio": 3.2409718151031974,
+      "threshold": 3,
+      "result": "PASS",
+      "scope": "Compositing scenario: one existing translucent fill over white under another marker outline; not a pixel measurement or exhaustive overlap audit"
+    },
+    {
+      "element": "Outline over Entire home/apt fill",
+      "source": "rgb(51, 51, 51) at 0.65",
+      "foreground": "#475B69",
+      "background": "#6DA7CE",
+      "ratio": 2.692418851271285,
+      "threshold": 3,
+      "result": "FAIL",
+      "scope": "Compositing scenario: one existing translucent fill over white under another marker outline; not a pixel measurement or exhaustive overlap audit"
+    },
+    {
+      "element": "Outline over Hotel room fill",
+      "source": "rgb(51, 51, 51) at 0.65",
+      "foreground": "#4A654A",
+      "background": "#76C176",
+      "ratio": 2.9804917641376223,
+      "threshold": 3,
+      "result": "FAIL",
+      "scope": "Compositing scenario: one existing translucent fill over white under another marker outline; not a pixel measurement or exhaustive overlap audit"
+    },
+    {
+      "element": "Legend outlines",
+      "source": "rgb(51, 51, 51)",
+      "foreground": "#333333",
+      "background": "#FFFFFF",
+      "ratio": 12.63465434445799,
+      "threshold": 3,
+      "result": "PASS",
+      "scope": "Opaque legend outline against white"
+    }
+  ],
+  "errors": [],
+  "limitations": "Computed full-coverage colors, not antialiased edge pixels. Actual overlap backgrounds depend on stacking; scenario rows are not observations of specific pixels. No claim of universal marker contrast."
+}
