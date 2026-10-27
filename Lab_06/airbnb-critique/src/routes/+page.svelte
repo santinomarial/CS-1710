@@ -25,7 +25,7 @@
 <svelte:head><title>Boston and Cambridge Airbnb listings | Lab 6 baseline</title></svelte:head>
 <main>
   <h1>Boston and Cambridge Airbnb listings</h1>
-  <p class="intro">Nightly price and total reviews, with room type shown by color and reviews per month shown by circle size.</p>
+  <p class="intro">Nightly price and total reviews, with room type shown by color and shape and reviews per month shown by marker size.</p>
   {#if error}
     <p role="alert">Could not load listings: {error}</p>
   {:else if loading}

@@ -1,0 +1,23 @@
+{
+  "checkedAt": "2026-10-26T23:15:58.388Z",
+  "browser": "156.0.8078.48",
+  "viewport": {
+    "width": 1280,
+    "height": 1000
+  },
+  "marks": 4777,
+  "roomCounts": {
+    "Private room": 1666,
+    "Entire home/apt": 3014,
+    "Hotel room": 97
+  },
+  "allMarkPositionsColorsOpacityAndSymbolPathsMatchExpected": true,
+  "areaFormula": "D3 symbol size = Math.PI * originalRadius(reviews_per_month) ** 2; path coordinates rounded to 6 decimals",
+  "simulation": "deuteranopia",
+  "command": "Emulation.setEmulatedVisionDeficiency",
+  "simulationChangesScreenshot": true,
+  "resetRestoresOrdinaryScreenshot": true,
+  "errors": [],
+  "protanopiaPerformed": false,
+  "contrastMeasured": false
+}

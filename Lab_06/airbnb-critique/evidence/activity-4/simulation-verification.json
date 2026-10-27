@@ -1,0 +1,32 @@
+{
+  "capturedAt": "2026-10-26T23:12:33.467Z",
+  "url": "http://127.0.0.1:5174/",
+  "browser": "156.0.8078.48",
+  "method": "Chrome DevTools Protocol Emulation.setEmulatedVisionDeficiency",
+  "simulation": "deuteranopia",
+  "commandSucceeded": true,
+  "simulatedScreenshotDiffersFromOrdinary": true,
+  "resetScreenshotMatchesOrdinary": true,
+  "viewport": {
+    "width": 1280,
+    "height": 1000
+  },
+  "marks": 4777,
+  "legendSampleCoordinates": [
+    {
+      "x": 96,
+      "y": 165
+    },
+    {
+      "x": 252,
+      "y": 165
+    },
+    {
+      "x": 387,
+      "y": 165
+    }
+  ],
+  "errors": [],
+  "protanopiaPerformed": false,
+  "contrastMeasured": false
+}

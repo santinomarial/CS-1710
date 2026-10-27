@@ -1,0 +1,32 @@
+{
+  "checkedAt": "2026-10-26T23:28:17.978Z",
+  "browser": "156.0.8078.48",
+  "method": "Chrome DevTools Protocol Emulation.setEmulatedVisionDeficiency",
+  "viewport": {
+    "width": 1280,
+    "height": 1000
+  },
+  "marks": 4777,
+  "checks": {
+    "protanopia": {
+      "commandSucceeded": true,
+      "differsFromOrdinary": true,
+      "resetRestoresOrdinary": true,
+      "screenshot": "protanopia-before.png"
+    },
+    "deuteranopia": {
+      "commandSucceeded": true,
+      "differsFromOrdinary": true,
+      "resetRestoresOrdinary": true,
+      "screenshot": "deuteranopia-recheck.png"
+    }
+  },
+  "errors": [],
+  "sourceHashes": {
+    "src/lib/ListingScatter.svelte": "206ec0b0a22ec0dceefaa643edc93fbe6e6b80a23f5c9f617e6f856df434697e",
+    "src/routes/+page.svelte": "b9e940da38bf4dcf18d0b06d354465b1e41912a241fd6fadc4730e0fcea5e0ea",
+    "static/airbnb_boston_cambridge.csv": "84eec18f92a39112058d3d7919700b6dfdf9895250b4459263809da5dba9eb5f"
+  },
+  "sourceAndDataUnchanged": true,
+  "contrastMeasured": false
+}
