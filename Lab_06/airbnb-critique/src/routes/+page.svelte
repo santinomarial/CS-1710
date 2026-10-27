@@ -3,6 +3,15 @@
   import * as d3 from 'd3';
   import ListingScatter from '#lib/ListingScatter.svelte';
 
+  // One shared interaction state: temporary preview and persistent selection.
+  let selection = $state({ hovered: null, selected: null });
+  let activeRoomType = $derived(selection.hovered ?? selection.selected);
+  function previewRoomType(roomType) { selection.hovered = roomType; }
+  function toggleRoomType(roomType) {
+    selection.selected = selection.selected === roomType ? null : roomType;
+    selection.hovered = null;
+  }
+
   let listings = $state([]);
   let loading = $state(true);
   let error = $state(null);
@@ -32,7 +41,7 @@
     <p>Loading listings...</p>
   {:else}
     <p class="count">Showing all {d3.format(',')(listings.length)} listings. June 2026 course dataset.</p>
-    <ListingScatter data={listings} />
+    <ListingScatter data={listings} {activeRoomType} selectedRoomType={selection.selected} onPreview={previewRoomType} onToggle={toggleRoomType} />
   {/if}
   <footer>Source: Inside Airbnb, Boston and Cambridge, June 2026. Course dataset excludes unpublished prices, extreme price outliers, and shared rooms. Reviews are not booking counts.</footer>
 </main>

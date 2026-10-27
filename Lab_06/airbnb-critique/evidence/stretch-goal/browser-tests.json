@@ -1,0 +1,20 @@
+{
+  "time": "2026-10-27T00:13:56.121Z",
+  "tests": [
+    "Entire home/apt: hover, leave, click persistence, preview over persistent selection, restoration and toggle clear passed",
+    "Private room: hover, leave, click persistence, preview over persistent selection, restoration and toggle clear passed",
+    "Hotel room: hover, leave, click persistence, preview over persistent selection, restoration and toggle clear passed",
+    "Tab reaches all legend buttons; visible focus; Enter and Space activate and clear native buttons",
+    "deuteranopia: hotel highlight captured; changed rendering and reset equality verified",
+    "protanopia: hotel highlight captured; changed rendering and reset equality verified"
+  ],
+  "errors": [],
+  "records": 4777,
+  "categoryCounts": [
+    3014,
+    1666,
+    97
+  ],
+  "geometryAndOrderUnchanged": true,
+  "originalOutlineRetained": true
+}

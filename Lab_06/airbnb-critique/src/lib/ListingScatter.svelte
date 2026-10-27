@@ -1,7 +1,11 @@
 <script>
   import * as d3 from 'd3';
 
-  let { data } = $props();
+  let { data, activeRoomType = null, selectedRoomType = null, onPreview, onToggle } = $props();
+  let appearance = $derived((roomType) => ({
+    fill: activeRoomType && roomType !== activeRoomType ? '#B8B8B8' : color(roomType),
+    opacity: activeRoomType ? (roomType === activeRoomType ? 1 : 0.12) : 0.65
+  }));
   const width = 1100;
   const height = 600;
   const margin = { top: 20, right: 24, bottom: 66, left: 80 };
@@ -33,9 +37,14 @@
 <figure>
   <div class="legend" aria-label="Room type legend">
     {#each roomTypes as roomType}
-      <span><svg class="legend-marker" viewBox="-10 -10 20 20" aria-hidden="true"><path d={symbolPath(roomType, Math.PI * 6 ** 2)} fill={color(roomType)} /></svg>{roomType}</span>
+      <button type="button" aria-pressed={selectedRoomType === roomType}
+        aria-label={roomType} class:preview={activeRoomType === roomType}
+        onmouseenter={() => onPreview(roomType)} onmouseleave={() => onPreview(null)}
+        onclick={() => onToggle(roomType)}><svg class="legend-marker" viewBox="-10 -10 20 20" aria-hidden="true"><path d={symbolPath(roomType, Math.PI * 6 ** 2)} fill={color(roomType)} /></svg>{roomType}<span class="selection-label">{selectedRoomType === roomType ? "Selected" : ""}</span></button>
     {/each}
   </div>
+  <p class="interaction-hint">Hover to preview. Click or use Enter/Space to select; activate again to clear.</p>
+  <p class="interaction-status" aria-live="polite">{activeRoomType ? `Highlighting ${activeRoomType}${activeRoomType === selectedRoomType ? ' (selected)' : ' (preview)'}. Other listings are dimmed, not removed.` : 'Showing all room types.'}</p>
   <p class="size-key">Marker size: average reviews per month (larger markers mean more reviews).</p>
   <svg viewBox="0 0 {width} {height}" role="img" aria-label="Scatterplot of all 4,777 Boston and Cambridge Airbnb listings. X is number of reviews, Y is nightly price in dollars, color and shape are room type, and marker size is reviews per month.">
     <g class="axis" transform="translate(0,{height - margin.bottom})" bind:this={xAxis}></g>
@@ -44,9 +53,10 @@
       {#each data as listing, i (i)}
         <path
           transform="translate({x(listing.number_of_reviews)},{y(listing.price)})"
-          fill={color(listing.room_type)}
+          data-room-type={listing.room_type}
+          fill={appearance(listing.room_type).fill}
           d={symbolPath(listing.room_type, Math.PI * radius(listing.reviews_per_month) ** 2)}
-          opacity="0.65"
+          opacity={appearance(listing.room_type).opacity}
         />
       {/each}
     </g>
@@ -59,7 +69,12 @@
   .marks path, .legend-marker path { stroke: #333333; stroke-width: 0.75; }
   figure { margin: 0; }
   .legend { display: flex; flex-wrap: wrap; gap: 24px; }
-  .legend span { display: inline-flex; align-items: center; gap: 8px; }
+  .legend button { display: inline-flex; align-items: center; gap: 8px; font: inherit; color: inherit; background: white; border: 1px solid #888; border-radius: 4px; padding: 8px; cursor: pointer; }
+  .legend button[aria-pressed="true"] { border: 2px solid #333; padding: 7px; font-weight: bold; }
+  .legend button.preview { background: #eee; }
+  .legend button:focus-visible { outline: 3px solid #222; outline-offset: 3px; }
+  .selection-label { min-width: 56px; font-size: 12px; }
+  .interaction-hint, .interaction-status { font-size: 14px; margin: 10px 0; }
   .legend .legend-marker { display: inline-block; width: 12px; height: 12px; overflow: visible; flex-shrink: 0; }
   .size-key { font-size: 14px; color: #555; margin: 12px 0; }
   svg { display: block; width: 100%; height: auto; }
