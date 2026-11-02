@@ -1,0 +1,74 @@
+[
+  {
+    "grade": "I1",
+    "viridis": "#440154",
+    "rainbow": "#6e40aa",
+    "viridisLuminance": 0.01890745028708783,
+    "rainbowLuminance": 0.09884067851728436,
+    "viridisDisplayedLuminance": 0.4214501932269341,
+    "rainbowDisplayedLuminance": 0.5435318804891732
+  },
+  {
+    "grade": "SI2",
+    "viridis": "#46327e",
+    "rainbow": "#d23ea7",
+    "viridisLuminance": 0.05089653600794722,
+    "rainbowLuminance": 0.19936907419344202,
+    "viridisDisplayedLuminance": 0.4959523939168064,
+    "rainbowDisplayedLuminance": 0.595188334032281
+  },
+  {
+    "grade": "SI1",
+    "viridis": "#365c8d",
+    "rainbow": "#ff5e63",
+    "viridisLuminance": 0.10361649507209753,
+    "rainbowLuminance": 0.30166259761685554,
+    "viridisDisplayedLuminance": 0.5554756081475375,
+    "rainbowDisplayedLuminance": 0.6613482595087736
+  },
+  {
+    "grade": "VS2",
+    "viridis": "#277f8e",
+    "rainbow": "#efa72f",
+    "viridisLuminance": 0.17563072671951993,
+    "rainbowLuminance": 0.4619339146770588,
+    "viridisDisplayedLuminance": 0.6075291244883321,
+    "rainbowDisplayedLuminance": 0.7701787678078976
+  },
+  {
+    "grade": "VS1",
+    "viridis": "#1fa187",
+    "rainbow": "#aff05b",
+    "viridisLuminance": 0.27530314299104564,
+    "rainbowLuminance": 0.7218946733824739,
+    "viridisDisplayedLuminance": 0.663999928247149,
+    "rainbowDisplayedLuminance": 0.8860561692820358
+  },
+  {
+    "grade": "VVS2",
+    "viridis": "#4ac16d",
+    "rainbow": "#40f373",
+    "viridisLuminance": 0.40699901123135485,
+    "rainbowLuminance": 0.6642897758565067,
+    "viridisDisplayedLuminance": 0.739634998085683,
+    "rainbowDisplayedLuminance": 0.8403612626739028
+  },
+  {
+    "grade": "VVS1",
+    "viridis": "#a0da39",
+    "rainbow": "#1ac7c2",
+    "viridisLuminance": 0.5791179809809306,
+    "rainbowLuminance": 0.44961501751605,
+    "viridisDisplayedLuminance": 0.8255659984849879,
+    "rainbowDisplayedLuminance": 0.7466299839748834
+  },
+  {
+    "grade": "IF",
+    "viridis": "#fde725",
+    "rainbow": "#417de0",
+    "viridisLuminance": 0.781680461121995,
+    "rainbowLuminance": 0.21172866975229876,
+    "viridisDisplayedLuminance": 0.9064716172795351,
+    "rainbowDisplayedLuminance": 0.6314242404812038
+  }
+]

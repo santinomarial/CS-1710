@@ -1,10 +1,13 @@
 <script>
   import * as d3 from 'd3';
-  let { data, mode = 'clarity' } = $props();
+  let { data, mode = 'clarity', comparisonPalette = null } = $props();
   const clarityOrder = ['I1', 'SI2', 'SI1', 'VS2', 'VS1', 'VVS2', 'VVS1', 'IF'];
   const clarityRank = new Map(clarityOrder.map((grade, rank) => [grade, rank]));
   const clarityColor = d3.scaleSequential(d3.interpolateViridis).domain([0, 7]);
-  const colorFor = grade => clarityColor(clarityRank.get(grade));
+  const rainbowColor = d3.scaleSequential(d3.interpolateRainbow).domain([0, 8]);
+  const colorFor = grade => comparisonPalette === 'rainbow'
+    ? rainbowColor(clarityRank.get(grade))
+    : clarityColor(clarityRank.get(grade));
   const residualColor = d3.scaleDiverging(t => d3.interpolatePuOr(t)).domain([-1.5083, 0, 1.5083]);
   const stops = Array.from({length: 101}, (_, i) => ({offset: i, color: residualColor(-1.5083 + i / 100 * 3.0166)}));
   const width = 1100, height = 600;

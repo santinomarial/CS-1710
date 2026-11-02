@@ -1,0 +1,31 @@
+{
+  "counts": [
+    53940,
+    53940
+  ],
+  "sameGeometry": true,
+  "fills": [
+    "#46327e",
+    "#365c8d",
+    "#1fa187",
+    "#277f8e",
+    "#4ac16d",
+    "#a0da39",
+    "#440154",
+    "#fde725"
+  ],
+  "rainbowFills": [
+    "rgb(210, 62, 167)",
+    "rgb(255, 94, 99)",
+    "rgb(175, 240, 91)",
+    "rgb(239, 167, 47)",
+    "rgb(64, 243, 115)",
+    "rgb(26, 199, 194)",
+    "rgb(110, 64, 170)",
+    "rgb(65, 125, 224)"
+  ],
+  "greyscaleCleared": true,
+  "Clarity grades": 53940,
+  "Price residual": 53940,
+  "errors": []
+}
