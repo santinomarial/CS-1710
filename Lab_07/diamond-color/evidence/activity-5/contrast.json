@@ -1,0 +1,37 @@
+{
+  "background": "#ffffff",
+  "text": [
+    {
+      "hex": "#222222",
+      "ratio": 15.909984431773273,
+      "passes": true
+    },
+    {
+      "hex": "#333333",
+      "ratio": 12.63465434445799,
+      "passes": true
+    },
+    {
+      "hex": "#444444",
+      "ratio": 9.739769120526205,
+      "passes": true
+    },
+    {
+      "hex": "#555555",
+      "ratio": 7.455177810447525,
+      "passes": true
+    }
+  ],
+  "residual": {
+    "domain": [
+      -1.5083,
+      0,
+      1.5083
+    ],
+    "negative": "rgb(45, 0, 75)",
+    "zero": "rgb(243, 238, 234)",
+    "positive": "rgb(127, 59, 8)",
+    "expectedNeutral": "rgb(243, 238, 234)",
+    "anchorPass": true
+  }
+}

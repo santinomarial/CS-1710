@@ -1,0 +1,4 @@
+ce12090 color by price_resid: diverging, neutral anchored at 0, symmetric domain
+fbd0a87 evidence: record Lab 7 Activity 3 checkpoint
+7db3a88 color by clarity: sequential ramp in rank order
+0d3ddf6 scaffold: empty SvelteKit project + diamonds data
