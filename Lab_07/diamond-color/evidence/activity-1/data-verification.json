@@ -1,0 +1,45 @@
+{
+  "status": "PASS",
+  "rows": 53940,
+  "cut": {
+    "Ideal": 21551,
+    "Premium": 13791,
+    "Good": 4906,
+    "Very Good": 12082,
+    "Fair": 1610
+  },
+  "color": {
+    "E": 9797,
+    "I": 5422,
+    "J": 2808,
+    "H": 8304,
+    "F": 9542,
+    "G": 11292,
+    "D": 6775
+  },
+  "clarity": {
+    "SI2": 9194,
+    "SI1": 13065,
+    "VS1": 8171,
+    "VS2": 12258,
+    "VVS2": 5066,
+    "VVS1": 3655,
+    "I1": 741,
+    "IF": 1790
+  },
+  "price": {
+    "min": 326,
+    "max": 18823,
+    "mean": 3932.799721913237
+  },
+  "residual": {
+    "min": -1.5083,
+    "max": 1.3379,
+    "negative": 27496,
+    "positive": 26434
+  },
+  "slice": {
+    "rows": 20,
+    "allRowsPresentInFullData": true
+  }
+}

@@ -1,0 +1,16 @@
+import fs from 'node:fs/promises';
+import assert from 'node:assert/strict';
+import {csvParse,rollup,min,max,mean} from 'd3';
+const numeric=['carat','depth','table','price','x','y','z','price_resid'];
+const parse=text=>csvParse(text,row=>{for(const col of numeric){assert.notEqual(row[col],'');row[col]=Number(row[col]);assert.ok(Number.isFinite(row[col]));}return row;});
+const rows=parse(await fs.readFile('static/diamonds.csv','utf8'));
+const counts=key=>Object.fromEntries(rollup(rows,a=>a.length,d=>d[key]));
+assert.equal(rows.length,53940);
+assert.deepEqual(counts('cut'),{Fair:1610,Good:4906,'Very Good':12082,Premium:13791,Ideal:21551});
+assert.deepEqual(counts('color'),{D:6775,E:9797,F:9542,G:11292,H:8304,I:5422,J:2808});
+assert.deepEqual(counts('clarity'),{I1:741,SI2:9194,SI1:13065,VS2:12258,VS1:8171,VVS2:5066,VVS1:3655,IF:1790});
+assert.equal(min(rows,d=>d.price),326);assert.equal(max(rows,d=>d.price),18823);assert.equal(mean(rows,d=>d.price).toFixed(2),'3932.80');
+assert.equal(rows.filter(d=>d.price_resid<0).length,27496);assert.equal(rows.filter(d=>d.price_resid>0).length,26434);
+const slice=parse(await fs.readFile('static/diamonds_slice20.csv','utf8'));assert.equal(slice.length,20);
+const fullRows=new Set(rows.map(d=>JSON.stringify(d)));assert.ok(slice.every(d=>fullRows.has(JSON.stringify(d))),'Slice rows must exist in full file');
+console.log(JSON.stringify({status:'PASS',rows:rows.length,cut:counts('cut'),color:counts('color'),clarity:counts('clarity'),price:{min:min(rows,d=>d.price),max:max(rows,d=>d.price),mean:mean(rows,d=>d.price)},residual:{min:min(rows,d=>d.price_resid),max:max(rows,d=>d.price_resid),negative:27496,positive:26434},slice:{rows:slice.length,allRowsPresentInFullData:true}},null,2));

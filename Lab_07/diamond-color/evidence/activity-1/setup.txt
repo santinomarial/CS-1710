@@ -1,0 +1,18 @@
+Lab 7 Activity 1, 2026-11-02
+Project: Lab_07/diamond-color
+Minimal SvelteKit, JavaScript, npm, D3.
+Course downloads from lab07.pdf:
+https://tinyurl.com/ym3zvmfu -> static/diamonds.csv
+https://tinyurl.com/5aba2ezd -> diamonds_README.md
+https://tinyurl.com/595723ff -> static/diamonds_slice20.csv
+Original downloaded files preserved without changes.
+
+Verification: node scripts/verify-data.mjs
+All full-file known answers passed; 20-row slice parsed and matched rows in full file.
+No separate slice answer sheet was supplied/downloaded.
+Production build passed. Default welcome page and both CSV endpoints returned HTTP 200.
+Dev server: npm run dev -- --host 127.0.0.1
+URL at verification: http://127.0.0.1:5173/
+Uses the existing course Git repository, with no nested repository.
+No chart or Activity 2-5 work has been started.
+npm reported 4 low-severity dependency advisories during installation; no forced dependency upgrades were applied.
