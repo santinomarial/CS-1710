@@ -1,0 +1,33 @@
+{
+  "clarity": {
+    "markers": 53940,
+    "checks": {
+      "deuteranopia": true,
+      "protanopia": true,
+      "achromatopsia": true
+    },
+    "resetMatches": true,
+    "textColors": [
+      "rgb(34, 34, 34)",
+      "rgb(68, 68, 68)",
+      "rgb(51, 51, 51)"
+    ]
+  },
+  "residual": {
+    "markers": 53940,
+    "checks": {
+      "deuteranopia": true,
+      "protanopia": true,
+      "achromatopsia": true
+    },
+    "resetMatches": true,
+    "textColors": [
+      "rgb(34, 34, 34)",
+      "rgb(68, 68, 68)",
+      "rgb(51, 51, 51)"
+    ]
+  },
+  "keyboardClarity": "true",
+  "keyboardResidual": "true",
+  "errors": []
+}
