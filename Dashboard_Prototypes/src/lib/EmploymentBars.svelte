@@ -91,7 +91,7 @@
 					aria-label="{d.cat}: {fmtCount(d.count)}, {fmtPct(d.count, denominator)}. Select."
 					class="row"
 					opacity={dim ? 0.4 : 1}
-					onclick={() => sel.toggle(mode, d.cat)}
+					onclick={(e) => { sel.toggle(mode, d.cat); tip(e, d); }}
 					onkeydown={(e) => onKey(e, d)}
 					onmousemove={(e) => tip(e, d)}
 					onmouseleave={() => sel.hideTip()}

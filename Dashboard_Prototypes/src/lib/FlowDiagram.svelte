@@ -13,7 +13,7 @@
 	// The compact strip spans a full-width row, so it gets a wider canvas to keep text at ~1:1.
 	let W = $derived(compact ? 1400 : 900);
 	let H = $derived(compact ? 300 : 540);
-	let M = $derived({ top: compact ? 26 : 34, right: compact ? 250 : 230, bottom: 8, left: 150 });
+	let M = $derived({ top: compact ? 26 : 34, right: compact ? 250 : 275, bottom: 8, left: compact ? 150 : 180 });
 	const NW = 12; // node width
 
 	let scoped = $derived(flows.filter((r) => sel.degree === 'All' || r.degree === sel.degree));
@@ -21,10 +21,15 @@
 	let total = $derived(sum(scoped));
 	let anySel = $derived(sel.active.length > 0);
 
+	// Matching count per node, so labels can read "matched of total" during a selection.
+	let matched = $derived(new Map(['origin', 'field', 'industry'].map((k) => [k, d3.rollup(subset, sum, (r) => r[k])])));
+	const matchOf = (n) => matched.get(n.key).get(n.cat) ?? 0;
+
 	let layout = $derived.by(() => {
 		if (total === 0) return null;
 		const pad = compact ? 5 : 10;
-		const xs = [M.left, (M.left + W - M.right - NW) / 2, W - M.right - NW];
+		// Middle column sits left of center in the large view so field labels clear the industry nodes.
+		const xs = [M.left, M.left + (W - M.right - NW - M.left) * (compact ? 0.5 : 0.36), W - M.right - NW];
 		const innerH = H - M.top - M.bottom;
 
 		const cols = [
@@ -168,10 +173,7 @@
 		sel.hover = { key: n.key, value: n.cat };
 		const scope = sel.degree === 'All' ? 'all degree levels' : sel.degree;
 		const lines = [`${fmtCount(n.count)} synthetic graduates`, `${fmtPct(n.count, total)} of ${fmtCount(total)} in scope (${scope})`];
-		if (anySel) {
-			const m = sum(subset.filter((r) => r[n.key] === n.cat));
-			lines.push(`Matching current selection: ${fmtCount(m)}`);
-		}
+		if (anySel) lines.push(`Matching current selection: ${fmtCount(matchOf(n))} (${fmtPct(matchOf(n), n.count)} of this ${n.key})`);
 		lines.push('Click to select');
 		sel.showTip(event, n.cat, lines, 'flows table');
 	}
@@ -216,7 +218,7 @@
 					class="ribbon"
 					onmousemove={(e) => ribbonTip(e, r)}
 					onmouseleave={() => sel.hideTip()}
-					onclick={() => ribbonClick(r)}
+					onclick={(e) => { ribbonClick(r); ribbonTip(e, r); }}
 				/>
 			{/each}
 		</g>
@@ -249,7 +251,7 @@
 				aria-label="{n.cat}: {fmtCount(n.count)} synthetic graduates. Select."
 				aria-pressed={selected}
 				class="node"
-				onclick={() => sel.toggle(n.key, n.cat)}
+				onclick={(e) => { sel.toggle(n.key, n.cat); nodeTip(e, n); }}
 				onkeydown={(e) => onKey(e, n)}
 				onmousemove={(e) => nodeTip(e, n)}
 				onmouseleave={() => sel.hideTip()}
@@ -271,9 +273,11 @@
 					text-anchor={n.ci === 0 ? 'end' : 'start'}
 					class="label halo"
 					class:selected
+					class:nomatch={anySel && matchOf(n) === 0}
 					font-size="12"
 				>
-					{n.cat}{#if !compact}<tspan class="count" dx="5">{fmtCount(n.count)}</tspan>{/if}
+					{n.cat}{#if anySel}<tspan class="count" dx="5">{fmtCount(matchOf(n))}{compact || n.ci === 1 ? '' : ` of ${fmtCount(n.count)}`}</tspan
+						>{:else if !compact}<tspan class="count" dx="5">{fmtCount(n.count)}</tspan>{/if}
 				</text>
 			</g>
 		{/each}
@@ -308,6 +312,10 @@
 
 	.label {
 		fill: var(--text-primary);
+	}
+
+	.label.nomatch {
+		fill: var(--text-muted);
 	}
 
 	.label.selected {
