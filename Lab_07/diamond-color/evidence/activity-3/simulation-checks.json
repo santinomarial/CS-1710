@@ -1,0 +1,12 @@
+{
+  "deuteranopia": {
+    "differsFromDefault": true
+  },
+  "protanopia": {
+    "differsFromDefault": true
+  },
+  "achromatopsia": {
+    "differsFromDefault": true
+  },
+  "resetMatchesDefault": true
+}
