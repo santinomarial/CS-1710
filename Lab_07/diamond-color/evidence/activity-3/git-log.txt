@@ -1,0 +1,2 @@
+7db3a88 color by clarity: sequential ramp in rank order
+0d3ddf6 scaffold: empty SvelteKit project + diamonds data
