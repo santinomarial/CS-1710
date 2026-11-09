@@ -1,0 +1,8 @@
+import {chromium} from '/Users/santinomarial/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs';import fs from 'node:fs';
+const b=await chromium.launch({channel:'chrome',headless:true});const p=await b.newPage({viewport:{width:1500,height:1050}});await p.goto('http://127.0.0.1:5175/');await p.waitForSelector('.selection-pin');const result={};
+for(const [id,total] of [['place-cntsq','4,152'],['place-knncl','5,615']]){await p.locator(`[data-station="${id}"]`).click();const text=await p.getByTestId('counts').innerText();if(!text.includes(total))throw Error(text);result[id]=text;}
+await p.locator('[data-station="place-harsq"]').focus();await p.keyboard.press('Enter');result.keyboard=await p.getByTestId('counts').innerText();
+const box=await p.locator('.selection-pin').boundingBox();await p.mouse.move(box.x+16,box.y+16);await p.mouse.down();await p.mouse.move(box.x+160,box.y+90,{steps:10});result.duringDrag=await p.getByTestId('counts').innerText();await p.mouse.up();
+result.labels=await p.locator('.line-identity text').count();result.transfers=await p.locator('.line-identity text.transfer').allTextContents();result.stationCount=await p.locator('[data-station]').count();
+await p.mouse.move(400,400);await p.mouse.down();await p.mouse.move(470,420,{steps:8});await p.mouse.up();await p.getByRole('button',{name:'Zoom in',exact:true}).click();result.invalidCoordinates=await p.locator('[data-station]').evaluateAll(es=>es.filter(e=>!Number.isFinite(+e.getAttribute('cx'))||!Number.isFinite(+e.getAttribute('cy'))).length);
+fs.writeFileSync('/Users/santinomarial/CS 1710/Lab_08/bike-map/evidence/activity-5/interaction-recheck.json',JSON.stringify(result,null,2));await b.close();

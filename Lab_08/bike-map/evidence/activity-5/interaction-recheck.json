@@ -1,0 +1,18 @@
+{
+  "place-cntsq": "4 bike stations · 4,152 trips started this week",
+  "place-knncl": "12 bike stations · 5,615 trips started this week",
+  "keyboard": "4 bike stations · 3,555 trips started this week",
+  "duringDrag": "6 bike stations · 3,962 trips started this week",
+  "labels": 125,
+  "transfers": [
+    "R/M",
+    "R/O",
+    "G/B",
+    "O/G",
+    "O/G",
+    "R/G",
+    "O/B"
+  ],
+  "stationCount": 732,
+  "invalidCoordinates": 0
+}

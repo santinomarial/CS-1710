@@ -24,6 +24,8 @@
   let loading = $state(true);
   const colors = {Red:'#DA291C', Orange:'#ED8B00', Blue:'#003DA5', Green:'#00843D', Mattapan:'#DA291C'};
   const linesFor = s => [...new Set(s.lines.split('|').filter(Boolean).map(l => l.startsWith('Green') ? 'Green' : l))];
+  const lineLabel = s => linesFor(s).map(l=>l==='Mattapan'?'M':l[0]).join('/');
+  function segment(i,n){const a=(i/n)*2*Math.PI-Math.PI/2+.06,b=((i+1)/n)*2*Math.PI-Math.PI/2-.06;return `M ${9*Math.cos(a)},${9*Math.sin(a)} A 9,9 0 ${b-a>Math.PI?1:0} 1 ${9*Math.cos(b)},${9*Math.sin(b)}`;}
   const colorFor = s => { const lines = linesFor(s); return lines.length > 1 ? '#222222' : colors[lines[0]] ?? '#222222'; };
   let projected = $derived.by(() => {
     revision;
@@ -72,7 +74,8 @@
   <header>
     <h1>Bluebikes and the T</h1>
     <p>September 14–20, 2026 · Drag the map to pan. Drag the ✥ handle or click a station to move the 400 m selection.</p>
-    <div class="legend"><span>● Bike dock</span>{#each Object.entries(colors).filter(([name])=>name!=='Mattapan') as [name,color]}<span><i style:border-color={color}></i>{name}</span>{/each}<span><i style:border-color="#222222"></i>Transfer</span></div>
+    <div class="legend"><span>● Bike dock</span>{#each Object.entries(colors).filter(([name])=>name!=='Mattapan') as [name,color]}<span><i style:border-color={color}>{name[0]}</i>{name}</span>{/each}<span><i style:border-color="#222222">T</i>Transfer (combined letters)</span></div>
+    <p class="note">Letters identify subway lines: R Red, O Orange, B Blue, G Green, M Mattapan. Transfers show each line’s letter; Green branches share G.</p>
     {#if loading}<p>Loading stations and trips…</p>{:else if error}<p role="alert">{error}</p>{:else}<p>{stations.length} stations · {d3.format(',')(trips.length)} trips loaded; trips in memory; only aggregate flows are drawn.</p><p class="note">{unmatched.affected} trips reference missing station {unmatched.ids.join(', ')}. Rows are retained; unavailable locations cannot be plotted.</p>{/if}
   </header>
   <div class="workspace">
@@ -83,6 +86,12 @@
       {#each flows as destination}<line x1={pinPoint.x} y1={pinPoint.y} x2={destination.point.x} y2={destination.point.y} stroke="#245c83" opacity="0.55" stroke-width={1+5*Math.sqrt(destination.count/(summary.destinations[0]?.count||1))} />{/each}
       {#each projected as station (station.id)}
         <circle data-station={station.id} data-lat={station.lat} data-lon={station.lon} cx={station.point.x} cy={station.point.y} r={station.kind==='bike'?(selected.has(station.id)?5:3):9} fill={station.kind==='bike'?(selected.has(station.id)?'#245c83':'#666'):'white'} fill-opacity={station.kind==='bike'?0.75:0.9} stroke={station.kind==='bike'?'none':colorFor(station)} stroke-width="3" class="station" style:pointer-events={Math.hypot(station.point.x-pinPoint.x,station.point.y-pinPoint.y)<22?'none':'auto'} role="button" tabindex="0" aria-label={'Select '+station.name} onclick={()=>choose(station)} onkeydown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose(station);}}}><title>{station.name}: {station.kind==='subway'?station.lines:'bike dock'}</title></circle>
+        {#if station.kind==='subway'}
+          <g transform="translate({station.point.x},{station.point.y})" class="line-identity">
+            {#if linesFor(station).length>1}{#each linesFor(station) as line,i}<path d={segment(i,linesFor(station).length)} fill="none" stroke={colors[line]??'#222'} stroke-width="3" />{/each}{/if}
+            <text text-anchor="middle" dy="3" class:transfer={linesFor(station).length>1}>{lineLabel(station)}</text>
+          </g>
+        {/if}
       {/each}
       <circle cx={pinPoint.x} cy={pinPoint.y} r="18" fill="white" stroke="#111" stroke-width="2" /><text x={pinPoint.x} y={pinPoint.y+7} text-anchor="middle" class="handle">✥</text>
     </svg>
@@ -108,7 +117,8 @@
   main{height:100dvh;display:flex;flex-direction:column;}
   header{padding:14px 22px;background:white;}
   h1{font-size:24px;margin:0 0 6px;}p{margin:5px 0;font-size:14px;}
-  .note{color:#555;font-size:12px;}.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;margin:10px 0;}.legend span{display:flex;align-items:center;gap:6px;}.legend i{width:10px;height:10px;border:3px solid;border-radius:50%;display:inline-block;}
+  .note{color:#555;font-size:12px;}.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;margin:10px 0;}.legend span{display:flex;align-items:center;gap:6px;}.legend i{width:10px;height:10px;border:3px solid;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font: bold 9px Arial;color:#111;}
+  .line-identity{pointer-events:none;}.line-identity text{font:bold 10px Arial;fill:#111;}.line-identity text.transfer{font-size:7px;}
   .handle{fill:#111;font-size:25px;}
   .workspace{display:flex;flex:1;min-height:0;}aside{width:390px;flex-shrink:0;overflow:auto;padding:16px;box-sizing:border-box;border-left:1px solid #ddd;}aside h2{font-size:17px;}aside p,li{font-size:12px;line-height:1.4;}li{padding-bottom:7px;}button{padding:6px;margin:3px;color:#222;background:white;border:1px solid #777;cursor:pointer;}button:focus-visible{outline:3px solid #245c83;}.station{pointer-events:auto;cursor:pointer;}.station:focus{outline:none;stroke:#111;stroke-width:5;} :global(.selection-pin){background:white;border:2px solid #111;border-radius:50%;box-sizing:border-box;display:grid;place-items:center;font-size:24px;cursor:grab;}
   .map-frame{flex:1;min-height:300px;position:relative;}.map{position:absolute;inset:0;}.overlay{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:500;}

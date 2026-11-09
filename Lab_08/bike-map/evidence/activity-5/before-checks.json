@@ -1,0 +1,11 @@
+{
+  "protanopia": {
+    "differentFromNormal": true
+  },
+  "deuteranopia": {
+    "differentFromNormal": true
+  },
+  "resetMatches": true,
+  "errors": [],
+  "stationCount": 732
+}

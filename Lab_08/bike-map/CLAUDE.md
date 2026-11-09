@@ -15,3 +15,5 @@ Agreed in this conversation before implementation; saved here after the user aut
 - Future views: hourly departures per weekday/weekend day, top outside-circle destinations with flow lines and list, selected bike-station count and weekly trip starts.
 - Current stage: muted map, pin, and linked views. Keep live drag updates: tested counts changed during dragging (3,555 to 3,962), while release-only stayed stale until release.
 - Interaction detail: station pointer targets within the pin handle must not intercept pin dragging.
+
+- Activity 5 revision: preserve transit colors but add line letters and split transfer rings, since protanopia/deuteranopia rendered Red and Green as similar olive tones. Transfer labels list the actual broad lines instead of just a dark ring.
