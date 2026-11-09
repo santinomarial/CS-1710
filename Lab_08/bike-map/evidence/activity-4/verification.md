@@ -1,0 +1,4 @@
+# Pin and linked views
+All three handout examples match: Harvard 4 docks/3555 starts, Central 4/4152, Kendall 12/5615. Exact weekday/weekend means and hourly arrays are in known-answers.json. The chart has 24 hour groups, each with weekday and weekend bars divided by 5 and 2 respectively. Outside-circle destinations are computed from trips starting at selected docks, not from trips restricted at both ends.
+
+An initial drag test found that the station under the pin intercepted dragging. Nearby station hit targets now yield to the pin; an overlay cross makes the handle visible. Retested actual pointer drags. Live updates changed counts before release; release-only changed only at release. Kept live updates. Comparison source snapshot and browser results retained. Browser errors: none. Unknown destinations are reported and not drawn.

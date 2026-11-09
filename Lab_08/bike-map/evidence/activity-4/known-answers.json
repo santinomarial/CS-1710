@@ -1,0 +1,725 @@
+{
+  "place-harsq": {
+    "stations": 4,
+    "total": 3555,
+    "weekday": 526,
+    "weekend": 462.5,
+    "missingEnds": 0,
+    "hourly": [
+      {
+        "hour": 0,
+        "weekday": 3.8,
+        "weekend": 20.5
+      },
+      {
+        "hour": 1,
+        "weekday": 0.6,
+        "weekend": 20.5
+      },
+      {
+        "hour": 2,
+        "weekday": 0.2,
+        "weekend": 7.5
+      },
+      {
+        "hour": 3,
+        "weekday": 0.6,
+        "weekend": 1
+      },
+      {
+        "hour": 4,
+        "weekday": 0,
+        "weekend": 0.5
+      },
+      {
+        "hour": 5,
+        "weekday": 0.6,
+        "weekend": 0.5
+      },
+      {
+        "hour": 6,
+        "weekday": 3.6,
+        "weekend": 1.5
+      },
+      {
+        "hour": 7,
+        "weekday": 6.2,
+        "weekend": 1
+      },
+      {
+        "hour": 8,
+        "weekday": 19.2,
+        "weekend": 4.5
+      },
+      {
+        "hour": 9,
+        "weekday": 15.8,
+        "weekend": 10.5
+      },
+      {
+        "hour": 10,
+        "weekday": 17.4,
+        "weekend": 22
+      },
+      {
+        "hour": 11,
+        "weekday": 22.8,
+        "weekend": 20
+      },
+      {
+        "hour": 12,
+        "weekday": 32.4,
+        "weekend": 35.5
+      },
+      {
+        "hour": 13,
+        "weekday": 34,
+        "weekend": 30.5
+      },
+      {
+        "hour": 14,
+        "weekday": 37,
+        "weekend": 37
+      },
+      {
+        "hour": 15,
+        "weekday": 35.6,
+        "weekend": 29.5
+      },
+      {
+        "hour": 16,
+        "weekday": 46.8,
+        "weekend": 46
+      },
+      {
+        "hour": 17,
+        "weekday": 60.6,
+        "weekend": 35.5
+      },
+      {
+        "hour": 18,
+        "weekday": 52.4,
+        "weekend": 31
+      },
+      {
+        "hour": 19,
+        "weekday": 40.4,
+        "weekend": 30
+      },
+      {
+        "hour": 20,
+        "weekday": 34.6,
+        "weekend": 23.5
+      },
+      {
+        "hour": 21,
+        "weekday": 27.2,
+        "weekend": 22
+      },
+      {
+        "hour": 22,
+        "weekday": 21,
+        "weekend": 14.5
+      },
+      {
+        "hour": 23,
+        "weekday": 13.2,
+        "weekend": 17.5
+      }
+    ],
+    "destinations": [
+      {
+        "id": "M32024",
+        "name": "Harvard University Radcliffe Quadrangle at Shepard St / Garden St",
+        "lat": 42.380287,
+        "lon": -71.125107,
+        "kind": "bike",
+        "municipality": "Cambridge",
+        "capacity": "19",
+        "lines": "",
+        "count": 143
+      },
+      {
+        "id": "A32019",
+        "name": "175 N Harvard St",
+        "lat": 42.364475,
+        "lon": -71.128408,
+        "kind": "bike",
+        "municipality": "Boston",
+        "capacity": "18",
+        "lines": "",
+        "count": 141
+      },
+      {
+        "id": "M32006",
+        "name": "MIT at Mass Ave / Amherst St",
+        "lat": 42.358306,
+        "lon": -71.093272,
+        "kind": "bike",
+        "municipality": "Cambridge",
+        "capacity": "31",
+        "lines": "",
+        "count": 112
+      },
+      {
+        "id": "A32014",
+        "name": "Stadium Rd at Western Ave",
+        "lat": 42.36306,
+        "lon": -71.125045,
+        "kind": "bike",
+        "municipality": "Boston",
+        "capacity": "32",
+        "lines": "",
+        "count": 81
+      },
+      {
+        "id": "M32073",
+        "name": "955 Mass Ave",
+        "lat": 42.368952,
+        "lon": -71.109988,
+        "kind": "bike",
+        "municipality": "Cambridge",
+        "capacity": "19",
+        "lines": "",
+        "count": 79
+      },
+      {
+        "id": "M32038",
+        "name": "Harvard University River Houses at DeWolfe St / Cowperthwaite St",
+        "lat": 42.369239,
+        "lon": -71.11687,
+        "kind": "bike",
+        "municipality": "Cambridge",
+        "capacity": "19",
+        "lines": "",
+        "count": 78
+      },
+      {
+        "id": "A32015",
+        "name": "N. Harvard St at Harvard Way",
+        "lat": 42.366783,
+        "lon": -71.125175,
+        "kind": "bike",
+        "municipality": "Boston",
+        "capacity": "20",
+        "lines": "",
+        "count": 76
+      },
+      {
+        "id": "A32052",
+        "name": "Harvard Stadium: N. Harvard St at Soldiers Field Rd",
+        "lat": 42.368019,
+        "lon": -71.1242,
+        "kind": "bike",
+        "municipality": "Boston",
+        "capacity": "15",
+        "lines": "",
+        "count": 75
+      },
+      {
+        "id": "M32011",
+        "name": "Central Square at Mass Ave / Essex St",
+        "lat": 42.36507,
+        "lon": -71.1031,
+        "kind": "bike",
+        "municipality": "Cambridge",
+        "capacity": "19",
+        "lines": "",
+        "count": 73
+      },
+      {
+        "id": "M32014",
+        "name": "Harvard University Housing - 115 Putnam Ave at Peabody Terrace",
+        "lat": 42.366621,
+        "lon": -71.114214,
+        "kind": "bike",
+        "municipality": "Cambridge",
+        "capacity": "15",
+        "lines": "",
+        "count": 72
+      }
+    ]
+  },
+  "place-cntsq": {
+    "stations": 4,
+    "total": 4152,
+    "weekday": 603.2,
+    "weekend": 568,
+    "missingEnds": 0,
+    "hourly": [
+      {
+        "hour": 0,
+        "weekday": 4.8,
+        "weekend": 19
+      },
+      {
+        "hour": 1,
+        "weekday": 2.2,
+        "weekend": 13.5
+      },
+      {
+        "hour": 2,
+        "weekday": 0,
+        "weekend": 11
+      },
+      {
+        "hour": 3,
+        "weekday": 0.4,
+        "weekend": 0.5
+      },
+      {
+        "hour": 4,
+        "weekday": 0.6,
+        "weekend": 0
+      },
+      {
+        "hour": 5,
+        "weekday": 1.8,
+        "weekend": 1.5
+      },
+      {
+        "hour": 6,
+        "weekday": 5,
+        "weekend": 2
+      },
+      {
+        "hour": 7,
+        "weekday": 18.8,
+        "weekend": 1.5
+      },
+      {
+        "hour": 8,
+        "weekday": 43.2,
+        "weekend": 10.5
+      },
+      {
+        "hour": 9,
+        "weekday": 32.8,
+        "weekend": 20
+      },
+      {
+        "hour": 10,
+        "weekday": 20.8,
+        "weekend": 31.5
+      },
+      {
+        "hour": 11,
+        "weekday": 21,
+        "weekend": 32.5
+      },
+      {
+        "hour": 12,
+        "weekday": 25.2,
+        "weekend": 42
+      },
+      {
+        "hour": 13,
+        "weekday": 26.8,
+        "weekend": 49.5
+      },
+      {
+        "hour": 14,
+        "weekday": 21.6,
+        "weekend": 39.5
+      },
+      {
+        "hour": 15,
+        "weekday": 29.4,
+        "weekend": 35.5
+      },
+      {
+        "hour": 16,
+        "weekday": 44.2,
+        "weekend": 37.5
+      },
+      {
+        "hour": 17,
+        "weekday": 64.8,
+        "weekend": 37.5
+      },
+      {
+        "hour": 18,
+        "weekday": 65,
+        "weekend": 47
+      },
+      {
+        "hour": 19,
+        "weekday": 58.6,
+        "weekend": 44
+      },
+      {
+        "hour": 20,
+        "weekday": 48.2,
+        "weekend": 36
+      },
+      {
+        "hour": 21,
+        "weekday": 33.8,
+        "weekend": 25.5
+      },
+      {
+        "hour": 22,
+        "weekday": 22.4,
+        "weekend": 15.5
+      },
+      {
+        "hour": 23,
+        "weekday": 11.8,
+        "weekend": 15
+      }
+    ],
+    "destinations": [
+      {
+        "id": "M32006",
+        "name": "MIT at Mass Ave / Amherst St",
+        "lat": 42.358306,
+        "lon": -71.093272,
+        "kind": "bike",
+        "municipality": "Cambridge",
+        "capacity": "31",
+        "lines": "",
+        "count": 185
+      },
+      {
+        "id": "M32042",
+        "name": "MIT Vassar St",
+        "lat": 42.355601,
+        "lon": -71.103945,
+        "kind": "bike",
+        "municipality": "Cambridge",
+        "capacity": "53",
+        "lines": "",
+        "count": 139
+      },
+      {
+        "id": "M32018",
+        "name": "Harvard Square at Mass Ave/ Dunster",
+        "lat": 42.373268,
+        "lon": -71.118579,
+        "kind": "bike",
+        "municipality": "Cambridge",
+        "capacity": "19",
+        "lines": "",
+        "count": 120
+      },
+      {
+        "id": "M32041",
+        "name": "MIT Pacific St at Purrington St",
+        "lat": 42.359573,
+        "lon": -71.101295,
+        "kind": "bike",
+        "municipality": "Cambridge",
+        "capacity": "19",
+        "lines": "",
+        "count": 115
+      },
+      {
+        "id": "M32037",
+        "name": "Ames St at Main St",
+        "lat": 42.3625,
+        "lon": -71.08822,
+        "kind": "bike",
+        "municipality": "Cambridge",
+        "capacity": "19",
+        "lines": "",
+        "count": 113
+      },
+      {
+        "id": "B32065",
+        "name": "Massachusetts Ave at Boylston St.",
+        "lat": 42.34752,
+        "lon": -71.088012,
+        "kind": "bike",
+        "municipality": "Boston",
+        "capacity": "24",
+        "lines": "",
+        "count": 102
+      },
+      {
+        "id": "M32073",
+        "name": "955 Mass Ave",
+        "lat": 42.368952,
+        "lon": -71.109988,
+        "kind": "bike",
+        "municipality": "Cambridge",
+        "capacity": "19",
+        "lines": "",
+        "count": 89
+      },
+      {
+        "id": "M32061",
+        "name": "Mass Ave at Albany St",
+        "lat": 42.361358,
+        "lon": -71.096703,
+        "kind": "bike",
+        "municipality": "Cambridge",
+        "capacity": "18",
+        "lines": "",
+        "count": 72
+      },
+      {
+        "id": "M32055",
+        "name": "Harvard St at Greene-Rose Heritage Park",
+        "lat": 42.365994,
+        "lon": -71.095222,
+        "kind": "bike",
+        "municipality": "Cambridge",
+        "capacity": "19",
+        "lines": "",
+        "count": 71
+      },
+      {
+        "id": "B32016",
+        "name": "Beacon St at Massachusetts Ave",
+        "lat": 42.350827,
+        "lon": -71.089811,
+        "kind": "bike",
+        "municipality": "Boston",
+        "capacity": "19",
+        "lines": "",
+        "count": 70
+      }
+    ]
+  },
+  "place-knncl": {
+    "stations": 12,
+    "total": 5615,
+    "weekday": 928.6,
+    "weekend": 486,
+    "missingEnds": 0,
+    "hourly": [
+      {
+        "hour": 0,
+        "weekday": 3.8,
+        "weekend": 7.5
+      },
+      {
+        "hour": 1,
+        "weekday": 2.6,
+        "weekend": 5
+      },
+      {
+        "hour": 2,
+        "weekday": 1.4,
+        "weekend": 7.5
+      },
+      {
+        "hour": 3,
+        "weekday": 0.4,
+        "weekend": 2
+      },
+      {
+        "hour": 4,
+        "weekday": 1,
+        "weekend": 0
+      },
+      {
+        "hour": 5,
+        "weekday": 0.8,
+        "weekend": 0
+      },
+      {
+        "hour": 6,
+        "weekday": 3.2,
+        "weekend": 1.5
+      },
+      {
+        "hour": 7,
+        "weekday": 15.2,
+        "weekend": 4.5
+      },
+      {
+        "hour": 8,
+        "weekday": 34.4,
+        "weekend": 11.5
+      },
+      {
+        "hour": 9,
+        "weekday": 24.8,
+        "weekend": 15
+      },
+      {
+        "hour": 10,
+        "weekday": 28.8,
+        "weekend": 18.5
+      },
+      {
+        "hour": 11,
+        "weekday": 43.2,
+        "weekend": 32.5
+      },
+      {
+        "hour": 12,
+        "weekday": 68,
+        "weekend": 33
+      },
+      {
+        "hour": 13,
+        "weekday": 47.8,
+        "weekend": 38.5
+      },
+      {
+        "hour": 14,
+        "weekday": 66.8,
+        "weekend": 45
+      },
+      {
+        "hour": 15,
+        "weekday": 80,
+        "weekend": 34
+      },
+      {
+        "hour": 16,
+        "weekday": 145,
+        "weekend": 37
+      },
+      {
+        "hour": 17,
+        "weekday": 150.2,
+        "weekend": 47
+      },
+      {
+        "hour": 18,
+        "weekday": 85.2,
+        "weekend": 49.5
+      },
+      {
+        "hour": 19,
+        "weekday": 57.2,
+        "weekend": 38.5
+      },
+      {
+        "hour": 20,
+        "weekday": 28.8,
+        "weekend": 23
+      },
+      {
+        "hour": 21,
+        "weekday": 13.8,
+        "weekend": 14.5
+      },
+      {
+        "hour": 22,
+        "weekday": 15.2,
+        "weekend": 13.5
+      },
+      {
+        "hour": 23,
+        "weekday": 11,
+        "weekend": 7
+      }
+    ],
+    "destinations": [
+      {
+        "id": "M32042",
+        "name": "MIT Vassar St",
+        "lat": 42.355601,
+        "lon": -71.103945,
+        "kind": "bike",
+        "municipality": "Cambridge",
+        "capacity": "53",
+        "lines": "",
+        "count": 456
+      },
+      {
+        "id": "M32006",
+        "name": "MIT at Mass Ave / Amherst St",
+        "lat": 42.358306,
+        "lon": -71.093272,
+        "kind": "bike",
+        "municipality": "Cambridge",
+        "capacity": "31",
+        "lines": "",
+        "count": 314
+      },
+      {
+        "id": "M32041",
+        "name": "MIT Pacific St at Purrington St",
+        "lat": 42.359573,
+        "lon": -71.101295,
+        "kind": "bike",
+        "municipality": "Cambridge",
+        "capacity": "19",
+        "lines": "",
+        "count": 273
+      },
+      {
+        "id": "M32011",
+        "name": "Central Square at Mass Ave / Essex St",
+        "lat": 42.36507,
+        "lon": -71.1031,
+        "kind": "bike",
+        "municipality": "Cambridge",
+        "capacity": "19",
+        "lines": "",
+        "count": 164
+      },
+      {
+        "id": "M32085",
+        "name": "Mass Ave/Lafayette Square",
+        "lat": 42.363565,
+        "lon": -71.100442,
+        "kind": "bike",
+        "municipality": "Cambridge",
+        "capacity": "15",
+        "lines": "",
+        "count": 160
+      },
+      {
+        "id": "M32065",
+        "name": "Kennedy-Longfellow School 158 Spring St",
+        "lat": 42.369553,
+        "lon": -71.08579,
+        "kind": "bike",
+        "municipality": "Cambridge",
+        "capacity": "19",
+        "lines": "",
+        "count": 85
+      },
+      {
+        "id": "B32016",
+        "name": "Beacon St at Massachusetts Ave",
+        "lat": 42.350827,
+        "lon": -71.089811,
+        "kind": "bike",
+        "municipality": "Boston",
+        "capacity": "19",
+        "lines": "",
+        "count": 82
+      },
+      {
+        "id": "M32061",
+        "name": "Mass Ave at Albany St",
+        "lat": 42.361358,
+        "lon": -71.096703,
+        "kind": "bike",
+        "municipality": "Cambridge",
+        "capacity": "18",
+        "lines": "",
+        "count": 81
+      },
+      {
+        "id": "M32094",
+        "name": "40 Thorndike St",
+        "lat": 42.369061,
+        "lon": -71.079999,
+        "kind": "bike",
+        "municipality": "Cambridge",
+        "capacity": "19",
+        "lines": "",
+        "count": 81
+      },
+      {
+        "id": "M32081",
+        "name": "Gore Street at Lambert Street",
+        "lat": 42.37308,
+        "lon": -71.086342,
+        "kind": "bike",
+        "municipality": "Cambridge",
+        "capacity": "19",
+        "lines": "",
+        "count": 78
+      }
+    ]
+  }
+}

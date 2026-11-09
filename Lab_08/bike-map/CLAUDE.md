@@ -13,4 +13,5 @@ Agreed in this conversation before implementation; saved here after the user aut
 - Bike stations: small gray dots. Subway: line-colored rings. Collapse Green branches to Green. Multi-line stations: dark ring so no line is arbitrarily prioritized.
 - Future selection: pin starts at Harvard; radius 400 m; count trips starting at selected bike stations, including destinations outside the circle. Station click also moves the pin.
 - Future views: hourly departures per weekday/weekend day, top outside-circle destinations with flow lines and list, selected bike-station count and weekly trip starts.
-- Current scope: unmuted base map and stations only, no pin or linked views yet.
+- Current stage: muted map, pin, and linked views. Keep live drag updates: tested counts changed during dragging (3,555 to 3,962), while release-only stayed stale until release.
+- Interaction detail: station pointer targets within the pin handle must not intercept pin dragging.

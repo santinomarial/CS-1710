@@ -1,0 +1,28 @@
+{
+  "Harvard": {
+    "counts": "4 bike stations · 3,555 trips started this week",
+    "peak17": "60.6",
+    "top": "Harvard University Radcliffe Quadrangle at Shepard St / Garden St 143"
+  },
+  "Central": {
+    "counts": "4 bike stations · 4,152 trips started this week",
+    "peak17": "64.8",
+    "top": "MIT at Mass Ave / Amherst St 185"
+  },
+  "Kendall/MIT": {
+    "counts": "12 bike stations · 5,615 trips started this week",
+    "peak17": "150.2",
+    "top": "MIT Vassar St 456"
+  },
+  "drag": {
+    "before": "4 bike stations · 3,555 trips started this week",
+    "during": "6 bike stations · 3,962 trips started this week",
+    "after": "6 bike stations · 3,962 trips started this week"
+  },
+  "releaseOnly": {
+    "before": "4 bike stations · 3,555 trips started this week",
+    "during": "4 bike stations · 3,555 trips started this week",
+    "after": "6 bike stations · 3,962 trips started this week"
+  },
+  "errors": []
+}
