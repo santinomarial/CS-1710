@@ -66,6 +66,7 @@
   </div>
 </main>
 <style>
+  :global(.leaflet-tile-pane){filter:grayscale(1) opacity(0.55);}
   :global(body){margin:0;font-family:Arial,sans-serif;color:#222;}
   main{height:100dvh;display:flex;flex-direction:column;}
   header{padding:14px 22px;background:white;}
