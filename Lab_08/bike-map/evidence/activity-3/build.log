@@ -1,0 +1,59 @@
+
+> bike-map@0.0.1 build
+> vite build
+
+vite v8.3.7 building ssr environment for production...
+transforming...
+✓ 138 modules transformed.
+rendering chunks...
+computing gzip size...
+.svelte-kit/output/server/.vite/manifest.json                         2.55 kB │ gzip:  0.48 kB
+.svelte-kit/output/server/_app/immutable/assets/_page.CG2J9ANQ.css   15.94 kB │ gzip:  6.62 kB
+.svelte-kit/output/server/chunks/index-server.js                      0.03 kB │ gzip:  0.05 kB
+.svelte-kit/output/server/env.js                                      0.29 kB │ gzip:  0.18 kB │ map:   0.57 kB
+.svelte-kit/output/server/entries/fallbacks/error.svelte.js           1.06 kB │ gzip:  0.42 kB │ map:   2.58 kB
+.svelte-kit/output/server/index.js                                    2.24 kB │ gzip:  0.90 kB │ map:   3.32 kB
+.svelte-kit/output/server/entries/pages/_layout.svelte.js             2.63 kB │ gzip:  1.10 kB │ map:   2.73 kB
+.svelte-kit/output/server/entries/pages/_page.svelte.js               3.28 kB │ gzip:  1.34 kB │ map:   6.37 kB
+.svelte-kit/output/server/chunks/server-errors.js                    23.96 kB │ gzip:  4.49 kB │ map:  34.73 kB
+.svelte-kit/output/server/chunks/server.js                           43.39 kB │ gzip: 12.06 kB │ map: 125.71 kB
+.svelte-kit/output/server/remote-entry.js                            54.23 kB │ gzip: 11.81 kB │ map:  89.76 kB
+.svelte-kit/output/server/chunks/internal.js                         87.86 kB │ gzip: 24.13 kB │ map: 192.25 kB
+.svelte-kit/output/server/chunks/instance.js                        117.51 kB │ gzip: 31.65 kB │ map: 239.95 kB
+
+✓ built in 118ms
+Analysing routes
+(node:3862) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Building app
+vite v8.3.7 building client environment for production...
+transforming...
+✓ 207 modules transformed.
+rendering chunks...
+computing gzip size...
+.svelte-kit/output/client/_app/version.json                           0.02 kB │ gzip:  0.04 kB
+.svelte-kit/output/client/.vite/manifest.json                         3.69 kB │ gzip:  0.65 kB
+.svelte-kit/output/client/_app/immutable/assets/2.CG2J9ANQ.css       15.94 kB │ gzip:  6.62 kB
+.svelte-kit/output/client/_app/immutable/entry/payload.DSmR2FwN.js    0.06 kB │ gzip:  0.07 kB
+.svelte-kit/output/client/_app/immutable/nodes/1.d3XwoWTo.js          0.32 kB │ gzip:  0.24 kB
+.svelte-kit/output/client/_app/immutable/entry/start.XEAhEh24.js      0.52 kB │ gzip:  0.30 kB
+.svelte-kit/output/client/_app/immutable/chunks/WkwZ5CU-.js           0.59 kB │ gzip:  0.36 kB
+.svelte-kit/output/client/_app/immutable/entry/app.DjdS4Nyx.js        1.14 kB │ gzip:  0.56 kB
+.svelte-kit/output/client/_app/immutable/chunks/Bjy-W4x2.js           1.36 kB │ gzip:  0.65 kB
+.svelte-kit/output/client/_app/immutable/chunks/DclECHGd.js           1.63 kB │ gzip:  0.83 kB
+.svelte-kit/output/client/_app/immutable/nodes/0.BXFXCR1c.js          2.38 kB │ gzip:  0.98 kB
+.svelte-kit/output/client/_app/immutable/chunks/D_kmO4GN.js           4.29 kB │ gzip:  1.93 kB
+.svelte-kit/output/client/_app/immutable/nodes/2.CVgl1RlQ.js         26.42 kB │ gzip:  9.81 kB
+.svelte-kit/output/client/_app/immutable/chunks/DoQIr7cl.js          39.25 kB │ gzip: 15.31 kB
+.svelte-kit/output/client/_app/immutable/chunks/B2jJTiO_.js          39.72 kB │ gzip: 14.67 kB
+.svelte-kit/output/client/_app/immutable/chunks/D0uBwwe5.js         148.59 kB │ gzip: 43.32 kB
+
+✓ built in 107ms
+(node:3862) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+Run npm run preview to preview your production build locally.
+
+> Using @sveltejs/adapter-auto
+Could not detect a supported production environment. See https://svelte.dev/docs/kit/adapters to learn how to configure your app to run on the platform of your choosing
+✔ done

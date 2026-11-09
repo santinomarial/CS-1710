@@ -1,0 +1,22 @@
+{
+  "stations": 732,
+  "invalid": 0,
+  "initial": {
+    "x": 700,
+    "y": 432
+  },
+  "during": {
+    "x": 800,
+    "y": 482
+  },
+  "deltaDuringDrag": {
+    "x": 100,
+    "y": 50
+  },
+  "zoomed": {
+    "x": 906,
+    "y": 535
+  },
+  "tilesLoaded": 30,
+  "errors": []
+}
