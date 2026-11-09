@@ -17,3 +17,6 @@ Agreed in this conversation before implementation; saved here after the user aut
 - Interaction detail: station pointer targets within the pin handle must not intercept pin dragging.
 
 - Activity 5 revision: preserve transit colors but add line letters and split transfer rings, since protanopia/deuteranopia rendered Red and Green as similar olive tones. Transfer labels list the actual broad lines instead of just a dark ring.
+
+## Stretch: The other end
+A shared direction state switches the spatial filter from start_id to end_id. Counts, hourly bars, and outside-circle counterpart locations all follow it. Start mode lists destinations; end mode lists origins. Both modes use started (departure time) because no arrival timestamp is supplied. Labels disclose this. Keep the same hourly y-domain across modes for a fixed pin. No causal or employment-identity claim follows from the pattern alone.

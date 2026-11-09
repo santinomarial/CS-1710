@@ -7,10 +7,14 @@
   let container;
   let pin;
   let center = $state({lat:42.373362,lon:-71.118956});
+  let direction = $state('start');
   let selectionName = $state('Harvard');
   const lookup = $derived(new Map(stations.map(s=>[s.id,s])));
   const selected = $derived(selectedIds(stations,center));
-  const summary = $derived(summaries(trips,selected,lookup));
+  const starts = $derived(summaries(trips,selected,lookup,'start'));
+  const ends = $derived(summaries(trips,selected,lookup,'end'));
+  const summary = $derived(direction==='start'?starts:ends);
+  const hourlyMaximum = $derived(d3.max([...starts.hourly,...ends.hourly],d=>Math.max(d.weekday,d.weekend)));
   const pinPoint = $derived.by(()=>{revision;return map?map.latLngToContainerPoint([center.lat,center.lon]):{x:0,y:0};});
   const radiusPx = $derived.by(()=>{revision;if(!map)return 0;const east=map.latLngToContainerPoint([center.lat,center.lon+400/(111195*Math.cos(center.lat*Math.PI/180))]);return Math.abs(east.x-pinPoint.x);});
   const flows = $derived.by(()=>{revision;return map?summary.destinations.map(d=>({...d,point:map.latLngToContainerPoint([d.lat,d.lon])})):[];});
@@ -98,16 +102,18 @@
   </div>
   <aside>
     <h2>Around {selectionName}</h2>
-    <p>Within 400 m · trips counted by start station</p>
-    <p data-testid="counts"><strong>{selected.size} bike stations · {d3.format(',')(summary.total)} trips started this week</strong></p>
+    <fieldset><legend>Trips within 400 m</legend><label><input type="radio" bind:group={direction} value="start" /> Starting here</label><label><input type="radio" bind:group={direction} value="end" /> Ending here</label></fieldset>
+    <p>Filter: {direction==='start'?'start':'end'} station within 400 m; the other end can be anywhere.</p>
+    <p data-testid="counts"><strong>{selected.size} bike stations · {d3.format(',')(summary.total)} trips {direction==='start'?'started':'ended'} this week</strong></p>
     <p>{summary.weekday.toFixed(1)} per weekday / {summary.weekend.toFixed(1)} per weekend day</p>
     <nav aria-label="Check a T station">{#each ['place-harsq','place-cntsq','place-knncl'] as id}{#if lookup.has(id)}<button onclick={()=>choose(lookup.get(id))}>{lookup.get(id).name}</button>{/if}{/each}</nav>
-    <HourlyChart data={summary.hourly} />
-    <h2>Where to: top destinations outside the circle</h2>
-    <p>Weekly trips; thicker lines mean more trips. Lines connect the pin to destinations, not actual cycling routes.</p>
+    <HourlyChart data={summary.hourly} mode={direction} maximum={hourlyMaximum} />
+    <p>Both modes use trip departure time, including trips ending here. The CSV has no arrival timestamp. Rates are per day; the vertical scale is shared across modes.</p>
+    <h2>{direction==='start'?'Where to: top destinations':'Where from: top origins'} outside the circle</h2>
+    <p>Weekly trips; thicker lines mean more trips. Lines connect the pin to {direction==='start'?'destinations':'origins'}, not actual cycling routes.</p>
     <ol>{#each summary.destinations as d}<li>{d.name} <strong>{d.count}</strong></li>{/each}</ol>
-    {#if !summary.total}<p>No trip starts in this selection.</p>{/if}
-    {#if summary.missingEnds}<p>{summary.missingEnds} selected trips have unknown destinations and are excluded from flow lines.</p>{/if}
+    {#if !summary.total}<p>No trips in this selection.</p>{/if}
+    {#if summary.missingEnds}<p>{summary.missingEnds} selected trips have unknown {direction==='start'?'destinations':'origins'} and are excluded from flow lines.</p>{/if}
   </aside>
   </div>
 </main>
@@ -119,6 +125,7 @@
   h1{font-size:24px;margin:0 0 6px;}p{margin:5px 0;font-size:14px;}
   .note{color:#555;font-size:12px;}.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;margin:10px 0;}.legend span{display:flex;align-items:center;gap:6px;}.legend i{width:10px;height:10px;border:3px solid;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font: bold 9px Arial;color:#111;}
   .line-identity{pointer-events:none;}.line-identity text{font:bold 10px Arial;fill:#111;}.line-identity text.transfer{font-size:7px;}
+  fieldset{border:1px solid #aaa;padding:8px;margin:10px 0;}fieldset label{display:inline-flex;align-items:center;margin-right:10px;font-size:13px;}
   .handle{fill:#111;font-size:25px;}
   .workspace{display:flex;flex:1;min-height:0;}aside{width:390px;flex-shrink:0;overflow:auto;padding:16px;box-sizing:border-box;border-left:1px solid #ddd;}aside h2{font-size:17px;}aside p,li{font-size:12px;line-height:1.4;}li{padding-bottom:7px;}button{padding:6px;margin:3px;color:#222;background:white;border:1px solid #777;cursor:pointer;}button:focus-visible{outline:3px solid #245c83;}.station{pointer-events:auto;cursor:pointer;}.station:focus{outline:none;stroke:#111;stroke-width:5;} :global(.selection-pin){background:white;border:2px solid #111;border-radius:50%;box-sizing:border-box;display:grid;place-items:center;font-size:24px;cursor:grab;}
   .map-frame{flex:1;min-height:300px;position:relative;}.map{position:absolute;inset:0;}.overlay{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:500;}

@@ -1,0 +1,50 @@
+{
+  "start": {
+    "total": 5615,
+    "at08": {
+      "hour": 8,
+      "weekday": 34.4,
+      "weekend": 11.5
+    },
+    "at17": {
+      "hour": 17,
+      "weekday": 150.2,
+      "weekend": 47
+    },
+    "top": {
+      "id": "M32042",
+      "name": "MIT Vassar St",
+      "lat": 42.355601,
+      "lon": -71.103945,
+      "kind": "bike",
+      "municipality": "Cambridge",
+      "capacity": "53",
+      "lines": "",
+      "count": 456
+    }
+  },
+  "end": {
+    "total": 5933,
+    "at08": {
+      "hour": 8,
+      "weekday": 209.2,
+      "weekend": 20
+    },
+    "at17": {
+      "hour": 17,
+      "weekday": 51.8,
+      "weekend": 24.5
+    },
+    "top": {
+      "id": "M32042",
+      "name": "MIT Vassar St",
+      "lat": 42.355601,
+      "lon": -71.103945,
+      "kind": "bike",
+      "municipality": "Cambridge",
+      "capacity": "53",
+      "lines": "",
+      "count": 544
+    }
+  }
+}

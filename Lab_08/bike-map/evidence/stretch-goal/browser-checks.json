@@ -1,0 +1,20 @@
+{
+  "start": {
+    "counts": "12 bike stations · 5,615 trips started this week",
+    "at08": "34.4",
+    "at17": "150.2",
+    "top": "MIT Vassar St 456",
+    "stations": 732
+  },
+  "end": {
+    "counts": "12 bike stations · 5,933 trips ended this week",
+    "at08": "209.2",
+    "at17": "51.8",
+    "top": "MIT Vassar St 544",
+    "stations": 732
+  },
+  "keyboardEnd": true,
+  "endCentral": "4 bike stations · 4,123 trips ended this week",
+  "startCentral": "4 bike stations · 4,152 trips started this week",
+  "errors": []
+}
